@@ -28,7 +28,7 @@ public class UltimIA implements IJoueur{
     }
 
     public String quadriName() {
-	throw new UnsupportedOperationException("Not supported yet.");
+	return "The UltimIA";
     }
 
 }
