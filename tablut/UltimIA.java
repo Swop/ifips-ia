@@ -11,8 +11,10 @@ package tablut;
  */
 public class UltimIA implements IJoueur{
 
+    private int color;
+
     public void initJoueur(int mycolour) {
-	throw new UnsupportedOperationException("Not supported yet.");
+	this.color = mycolour;
     }
 
     public String choixMouvement() {
