@@ -97,7 +97,7 @@ public class PlateauJoueur{
             y2=Integer.parseInt(mouvement[3])-1;
 
             if(x1<0 || x1>8 || y1<0 || y1>8 || x2<0 || x2>8 || y2<0 || y2>8) return false; //erreur si les coordonnées ne sont pas dans le plateau
-            if(this.Plateau[x2][y2]!=0) return false; //erreur si la position final est déjà occupée
+            if(this.MouvementPossible(x1, y1, x2, y2)) return false; //erreur si le trajet est impossbile ou encombre
             this.Plateau[x2][y2]=this.Plateau[x1][y1];
             this.Plateau[x1][y1]=0;
             Lmove.add(move);
@@ -224,16 +224,66 @@ public class PlateauJoueur{
 
         /**
          * compare les valeurs de deux cases afin de voir si un pion peux etre mangé entre les deux
-         * @param case1 la valeur de la case1
-         * @param case2 la valeur de la case2
-         * @return 0 si les deux pions sur ces cases appartiennent a la même couleur ou qu'il y a un pion et le trône
-         * @return 1 si les deux pions sont de couleur differentes
-         * @return 2 si une des deux cases ne contient pas de pion
+         * @param   case1 la valeur de la case1
+         * @param   case2 la valeur de la case2
+         * @return  0 si les deux pions sur ces cases appartiennent a la même couleur ou qu'il y a un pion et le trône
+         * @return  1 si les deux pions sont de couleur differentes
+         * @return  2 si une des deux cases ne contient pas de pion
          */
         public int CompareCouleur(int case1, int case2){
             if(case1*case2==0 || case1==4 || case2==4) return 2;
             else if(case1==case2 || case1*case2==3 || case1==5 || case2==5) return 0;
             else if(case1*case2==2 || case1*case2==6) return 1;
             else return 404;
+        }
+
+        /**
+         * verifie que le mouvement demandé est faisable
+         * @param x1    abscisse de la case de depart
+         * @param y1    ordonnée de la case de depart
+         * @param x2    abscisse de la case d'arrivé
+         * @param y2    ordonnée de la case d'ordonnée
+         * @return      vrai si le mouvment est possible, faux sinon
+         */
+        public boolean MouvementPossible(int x1, int y1, int x2, int y2){
+
+            boolean Poss = true;
+
+            if(x1==x2 && y1!=y2){
+                if(y1>y2){
+                    int ytmp;
+                    ytmp=y1;
+                    y1=y2;
+                    y2=ytmp;
+                }
+                for(int i=y1;i<=y2;i++){
+                    if(this.Plateau[x1][i]!=0){
+                        Poss=false;
+                        break;
+                    }
+                }
+            }
+            else if(x1!=x2 && y1==y2){
+                if(x1>x2){
+                    int xtmp;
+                    xtmp=x1;
+                    x1=x2;
+                    x2=xtmp;
+                }
+                for(int i=x1;i<=x2;i++){
+                    if(this.Plateau[i][y1]!=0){
+                        Poss=false;
+                        break;
+                    }
+                }
+            }
+            else if(x1==x2 && y1==y2){
+                Poss=false;
+            }
+            else if(x1!=x2 && y1!=y2){
+                Poss=false;
+            }
+            
+            return Poss;
         }
 }
