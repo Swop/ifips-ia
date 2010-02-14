@@ -98,11 +98,14 @@ public class PlateauJoueur{
 
             if(x1<0 || x1>8 || y1<0 || y1>8 || x2<0 || x2>8 || y2<0 || y2>8) return false; //erreur si les coordonnées ne sont pas dans le plateau
             if(this.Plateau[x2][y2]!=0) return false; //erreur si la position final est déjà occupée
-            if(!this.Bougeable(this.Plateau[x1][y1]))return false; //faux si ce n'est pas la bonne couleur
             this.Plateau[x2][y2]=this.Plateau[x1][y1];
             this.Plateau[x1][y1]=0;
             Lmove.add(move);
-            this.Consequences(x1,y1);//effectue les suppressions de pions ou Roi si le mouvement effectué le permet
+            if(x1==4 && y1==4){
+                Lmove.add("trone");
+                this.Plateau[4][4]=5;
+            }
+            this.Consequences(x2,y2);//effectue les suppressions de pions ou Roi si le mouvement effectué le permet
             return true;
         }
 
@@ -119,7 +122,6 @@ public class PlateauJoueur{
         /**
          * effectue les prise de pion s'il y en a
          * les suppresions sont enregistrer de cette façon "numero_pion abscisse ordonnée"
-         * la disponibilité du trone est aussi mise a jour
          * @param x abscisse du pion
          * @param y ordonnée du pion
          */
@@ -127,25 +129,53 @@ public class PlateauJoueur{
 
             // !!!!!Attention la suppression du roi n'est pas faites !!!!!
 
-            if(x-2>=0 && this.Plateau[x-1][y]*this.Plateau[x][y]==2)if(this.Plateau[x-2][y]==this.Plateau[x][y] || this.Plateau[x-2][y]==5){
-                                                                        Lmove.add("%n"+this.Plateau[x-1][y]+" %n"+(x-1)+" %n"+y);
-                                                                        this.Plateau[x-1][y]=0;
-                                                                    }
-            if(x+2<9 && this.Plateau[x+1][y]*this.Plateau[x][y]==2)if(this.Plateau[x+2][y]==this.Plateau[x][y] || this.Plateau[x+2][y]==5){
-                                                                        Lmove.add("%n"+this.Plateau[x+1][y]+" %n"+(x+1)+" %n"+y);
-                                                                        this.Plateau[x+1][y]=0;                                                                     
-                                                                    }
-            if(y-2>=0 && this.Plateau[x][y-1]*this.Plateau[x][y]==2)if(this.Plateau[x][y-2]==this.Plateau[x][y] || this.Plateau[x][y-2]==5){
-                                                                        Lmove.add("%n"+this.Plateau[x][y-1]+" %n"+x+" %n"+(y-1));
-                                                                        this.Plateau[x][y-1]=0;
-                                                                    }
-            if(y+2<9 && this.Plateau[x][y+1]*this.Plateau[x][y]==2)if(this.Plateau[x][y+2]==this.Plateau[x][y] || this.Plateau[x][y+2]==5){
-                                                                        Lmove.add("%n"+this.Plateau[x][y+1]+" %n"+x+" %n"+(y+1));
-                                                                        this.Plateau[x][y+1]=0;
-                                                                    }
-            if(x==4 && y==4){
-                Lmove.add("trone");
-                this.Plateau[4][4]=5;
+            if(x-2>=0 && this.CompareCouleur(this.Plateau[x-2][y], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y], this.Plateau[x][y])==1){
+                if(this.Plateau[x-1][y]!=3){
+                    Lmove.add("%n"+this.Plateau[x-1][y]+" %n"+(x-1)+" %n"+y);
+                    this.Plateau[x-1][y]=0;
+                }
+                else{
+                    if(y-1>=0 && y+1<=8 && this.CompareCouleur(this.Plateau[x-1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y+1], this.Plateau[x][y])==0){
+                        Lmove.add("%n"+this.Plateau[x-1][y]+" %n"+(x-1)+" %n"+y);
+                        this.Plateau[x-1][y]=0;
+                    }
+                }
+            }
+            if(x+2<9 && this.CompareCouleur(this.Plateau[x+2][y], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x+1][y], this.Plateau[x][y])==1){
+                if(this.Plateau[x+1][y]!=3){
+                    Lmove.add("%n"+this.Plateau[x+1][y]+" %n"+(x+1)+" %n"+y);
+                    this.Plateau[x+1][y]=0;
+                }
+                else{
+                    if(y-1>=0 && y+1<=8 && this.CompareCouleur(this.Plateau[x+1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x+1][y+1], this.Plateau[x][y])==0){
+                        Lmove.add("%n"+this.Plateau[x+1][y]+" %n"+(x+1)+" %n"+y);
+                        this.Plateau[x+1][y]=0;
+                    }
+                }
+            }
+            if(y-2>=0 && this.CompareCouleur(this.Plateau[x][y-2], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x][y-1], this.Plateau[x][y])==1){
+                if(this.Plateau[x][y-1]!=3){
+                    Lmove.add("%n"+this.Plateau[x][y-1]+" %n"+x+" %n"+(y-1));
+                    this.Plateau[x][y-1]=0;
+                 }
+                else{
+                    if(x-1>=0 && x+1<=8 && this.CompareCouleur(this.Plateau[x+1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y-1], this.Plateau[x][y])==0){
+                        Lmove.add("%n"+this.Plateau[x][y-1]+" %n"+x+" %n"+(y-1));
+                        this.Plateau[x][y-1]=0;
+                    }
+                }
+            }
+            if(y+2>=0 && this.CompareCouleur(this.Plateau[x][y+2], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x][y+1], this.Plateau[x][y])==1){
+                if(this.Plateau[x][y+1]!=3){
+                    Lmove.add("%n"+this.Plateau[x][y+1]+" %n"+x+" %n"+(y+1));
+                    this.Plateau[x][y+1]=0;
+                }
+                else{
+                    if(x-1>=0 && x+1<=8 && this.CompareCouleur(this.Plateau[x+1][y+1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y+1], this.Plateau[x][y])==0){
+                        Lmove.add("%n"+this.Plateau[x][y+1]+" %n"+x+" %n"+(y+1));
+                        this.Plateau[x][y+1]=0;
+                    }
+                }
             }
         }
 
@@ -191,14 +221,19 @@ public class PlateauJoueur{
             }
         }
 
-	
+
         /**
-         * renvoie faux si on n'est pas sensé pouvoir jouer le pion (si ce n'est pas notre couleur)
-         * @param pion  la couleur du pion a jouer
-         * @return  vrai si on peut jouer, faux sinon
+         * compare les valeurs de deux cases afin de voir si un pion peux etre mangé entre les deux
+         * @param case1 la valeur de la case1
+         * @param case2 la valeur de la case2
+         * @return 0 si les deux pions sur ces cases appartiennent a la même couleur ou qu'il y a un pion et le trône
+         * @return 1 si les deux pions sont de couleur differentes
+         * @return 2 si une des deux cases ne contient pas de pion
          */
-        public boolean Bougeable(int pion){
-            
-            return false;
+        public int CompareCouleur(int case1, int case2){
+            if(case1*case2==0 || case1==4 || case2==4) return 2;
+            else if(case1==case2 || case1*case2==3 || case1==5 || case2==5) return 0;
+            else if(case1*case2==2 || case1*case2==6) return 1;
+            else return 404;
         }
 }
