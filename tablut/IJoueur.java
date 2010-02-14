@@ -36,6 +36,7 @@ public interface IJoueur {
 	 */
 	public String choixMouvement();	
 
+
 	
 	/**
 	 * Méthode appelée par l'arbitre pour désigner le vainqueur. Vous pouvez en profiter pour
