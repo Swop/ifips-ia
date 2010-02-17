@@ -6,6 +6,7 @@
 package tablut;
 import java.lang.String;
 import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -14,8 +15,10 @@ import java.util.Vector;
 public class PlateauJoueur{
 	
 	
+	boolean VictoireNoir;
+	boolean VictoireBlanc;
 	private int[][] Plateau;
-        private Vector<String> Lmove;   //contient la liste des modifications apportées au plateau de jeu
+    private Vector<String> Lmove;   //contient la liste des modifications apportées au plateau de jeu
 
         /**
          * Creation du plateau de jeu
@@ -28,6 +31,8 @@ public class PlateauJoueur{
          */
 	public PlateauJoueur(){
 
+			this.VictoireBlanc=false;
+			this.VictoireNoir=false;
             this.Plateau = new int[9][9];
 
             //initialisation du plateau, toutes les cases sont vides
@@ -74,7 +79,7 @@ public class PlateauJoueur{
             this.Plateau[5][4]=2;
             this.Plateau[6][4]=2;
 
-            //Placement de la Roi
+            //Placement du Roi
             this.Plateau[4][4]=3;
 
 	};
@@ -86,18 +91,15 @@ public class PlateauJoueur{
          */
         public boolean AppliqueMouvement(String move){
             int x1, y1, x2, y2;
+            
             String[] mouvement;
             mouvement=move.split(" ");
-
-            if(mouvement.length!=4)return false ;//erreur si le format d'écriture du coup n'est pas bon
 
             x1=Integer.parseInt(mouvement[0])-1;
             y1=Integer.parseInt(mouvement[1])-1;
             x2=Integer.parseInt(mouvement[2])-1;
             y2=Integer.parseInt(mouvement[3])-1;
 
-            if(x1<0 || x1>8 || y1<0 || y1>8 || x2<0 || x2>8 || y2<0 || y2>8) return false; //erreur si les coordonnées ne sont pas dans le plateau
-            if(this.MouvementPossible(x1, y1, x2, y2)) return false; //erreur si le trajet est impossbile ou encombre
             this.Plateau[x2][y2]=this.Plateau[x1][y1];
             this.Plateau[x1][y1]=0;
             Lmove.add(move);
@@ -138,6 +140,7 @@ public class PlateauJoueur{
                     if(y-1>=0 && y+1<=8 && this.CompareCouleur(this.Plateau[x-1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y+1], this.Plateau[x][y])==0){
                         Lmove.add("%n"+this.Plateau[x-1][y]+" %n"+(x-1)+" %n"+y);
                         this.Plateau[x-1][y]=0;
+                        this.VictoireNoir=true;
                     }
                 }
             }
@@ -150,6 +153,7 @@ public class PlateauJoueur{
                     if(y-1>=0 && y+1<=8 && this.CompareCouleur(this.Plateau[x+1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x+1][y+1], this.Plateau[x][y])==0){
                         Lmove.add("%n"+this.Plateau[x+1][y]+" %n"+(x+1)+" %n"+y);
                         this.Plateau[x+1][y]=0;
+                        this.VictoireNoir=true;
                     }
                 }
             }
@@ -162,6 +166,7 @@ public class PlateauJoueur{
                     if(x-1>=0 && x+1<=8 && this.CompareCouleur(this.Plateau[x+1][y-1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y-1], this.Plateau[x][y])==0){
                         Lmove.add("%n"+this.Plateau[x][y-1]+" %n"+x+" %n"+(y-1));
                         this.Plateau[x][y-1]=0;
+                        this.VictoireNoir=true;
                     }
                 }
             }
@@ -174,6 +179,7 @@ public class PlateauJoueur{
                     if(x-1>=0 && x+1<=8 && this.CompareCouleur(this.Plateau[x+1][y+1], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y+1], this.Plateau[x][y])==0){
                         Lmove.add("%n"+this.Plateau[x][y+1]+" %n"+x+" %n"+(y+1));
                         this.Plateau[x][y+1]=0;
+                        this.VictoireNoir=true;
                     }
                 }
             }
@@ -210,6 +216,7 @@ public class PlateauJoueur{
                 if(x<=8 && x>=0 && y<=8 && y>=0){
                     this.Plateau[x][y]=pion;
                     this.Lmove.removeElementAt(this.Lmove.size()-1);
+                    if(pion==3) this.VictoireNoir=false;
                     this.AnnuleDernierCoup();   //ce n'est pas un coup mais une suppression de pion qu'on a annulé!! il faut annuler le mouvement du pion responsable de cette suppression maintenant
                 }
             }
@@ -237,53 +244,100 @@ public class PlateauJoueur{
             else return 404;
         }
 
-        /**
-         * verifie que le mouvement demandé est faisable
-         * @param x1    abscisse de la case de depart
-         * @param y1    ordonnée de la case de depart
-         * @param x2    abscisse de la case d'arrivé
-         * @param y2    ordonnée de la case d'ordonnée
-         * @return      vrai si le mouvment est possible, faux sinon
-         */
-        public boolean MouvementPossible(int x1, int y1, int x2, int y2){
-
-            boolean Poss = true;
-
-            if(x1==x2 && y1!=y2){
-                if(y1>y2){
-                    int ytmp;
-                    ytmp=y1;
-                    y1=y2;
-                    y2=ytmp;
-                }
-                for(int i=y1;i<=y2;i++){
-                    if(this.Plateau[x1][i]!=0){
-                        Poss=false;
-                        break;
-                    }
-                }
-            }
-            else if(x1!=x2 && y1==y2){
-                if(x1>x2){
-                    int xtmp;
-                    xtmp=x1;
-                    x1=x2;
-                    x2=xtmp;
-                }
-                for(int i=x1;i<=x2;i++){
-                    if(this.Plateau[i][y1]!=0){
-                        Poss=false;
-                        break;
-                    }
-                }
-            }
-            else if(x1==x2 && y1==y2){
-                Poss=false;
-            }
-            else if(x1!=x2 && y1!=y2){
-                Poss=false;
-            }
-            
-            return Poss;
+        
+        public vector<String> GenereMouvements(int myColor,int xf,int yf){
+        	
+        	Vector<String> mesMouv = new Vector<String>;
+        	
+        	if(xf<8){
+	        	for(int i=xf+1;i<=8;i++){
+	        		if(this.Plateau[i][yf]!=0 && this.Plateau[i][yf]!=5){
+	        			if(this.CompareCouleur(this.Plateau[i][yf],myColor)!=0) break;
+	        			else{
+	        				mesMouv.add(i+" "+yf+" "+xf+" "+yf);
+	        				break;
+	        			}
+	        		}
+	        	}
+        	}
+        	
+        	if(xf>0){
+	        	for(int i=xf-1;i>=0;i--){
+	        		if(this.Plateau[i][yf]!=0 && this.Plateau[i][yf]!=5){
+	        			if(this.CompareCouleur(this.Plateau[i][yf],myColor)!=0) break;
+	        			else{
+	        				mesMouv.add((i+1)+" "+(yf+1)+" "+(xf+1)+" "+(yf+1));
+	        				break;
+	        			}
+	        		}
+	        	}
+        	}
+        	
+        	if(yf<8){
+	        	for(int i=yf+1;i<=8;i++){
+	        		if(this.Plateau[xf][i]!=0 && this.Plateau[xf][i]!=5){
+	        			if(this.CompareCouleur(this.Plateau[xf][i],myColor)!=0) break;
+	        			else{
+	        				mesMouv.add((xf+1)+" "+(i+1)+" "+(xf+1)+" "+(yf+1));
+	        				break;
+	        			}
+	        		}
+	        	}
+        	}
+        	
+        	if(yf>0){
+	        	for(int i=yf-1;i>=0;i--){
+	        		if(this.Plateau[xf][i]!=0 && this.Plateau[xf][i]!=5){
+	        			if(this.CompareCouleur(this.Plateau[xf][i],myColor)!=0) break;
+	        			else{
+	        				mesMouv.add((xf+1)+" "+(i+1)+" "+(xf+1)+" "+(yf+1));
+	        				break;
+	        			}
+	        		}
+	        	}
+        	}
+        	
         }
+        
+        
+        public int Heuristique(int myColor){
+        	
+        	if(this.VictoireBlanc){
+        		if(myColor==1)return Integer.MAX_VALUE;
+        		else return Integer.MIN_VALUE;
+        	}
+        	if(this.VictoireNoir){
+        		if(myColor==2)return Integer.MAX_VALUE;
+        		else return Integer.MIN_VALUE;
+        	}
+        	
+        	int HeuristiqueNoir=0;
+        	int HeuristiqueBlanc=0;
+        	
+        	for(int i=0;i<9;i++){
+        		for(int j=0;j<9;j++){
+        			if(this.CompareCouleur(this.Plateau[i][j],1)==0){
+	        			if(this.Plateau[i][j]==1){
+	        				HeuristiqueBlanc+=this.Liberte(i,j);
+	        				HeuristiqueBlanc+=this.Mangeable(i,j);
+	        				HeuristiqueBlanc+=this.Mangeur(i,j);
+	        			}
+	        			else{
+	        				HeuristiqueBlanc+=this.Liberte(i,j);
+	        				HeuristiqueBlanc+=this.Mangeable(i,j);
+	        				HeuristiqueBlanc+=this.Mangeur(i,j);
+	        			}
+        			}
+        			else if(this.CompareCouleur(this.Plateau[i][j],2)==0){
+        				HeuristiqueNoir+=this.Liberte(i,j);
+        				HeuristiqueNoir+=this.Mangeable(i,j);
+        				HeuristiqueNoir+=this.Mangeur(i,j);
+        			}
+        		}
+        	}
+        	
+        	return heuri;
+        }
+
+        
 }
