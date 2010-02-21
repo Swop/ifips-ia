@@ -17,6 +17,8 @@ public class PlateauJoueur{
 	
 	boolean VictoireNoir;
 	boolean VictoireBlanc;
+        int nb_pion_blanc;
+        int nb_pion_noir;
 	private int[][] Plateau;
     private Vector<String> Lmove;   //contient la liste des modifications apportées au plateau de jeu
 
@@ -31,8 +33,10 @@ public class PlateauJoueur{
          */
 	public PlateauJoueur(){
 
-			this.VictoireBlanc=false;
-			this.VictoireNoir=false;
+            this.VictoireBlanc=false;
+            this.VictoireNoir=false;
+            this.nb_pion_blanc=8;
+            this.nb_pion_noir=12;
             this.Plateau = new int[9][9];
 
             //initialisation du plateau, toutes les cases sont vides
@@ -69,15 +73,15 @@ public class PlateauJoueur{
 
             //Placement des pions blancs
 
-            this.Plateau[4][2]=2;
-            this.Plateau[4][3]=2;
-            this.Plateau[4][5]=2;
-            this.Plateau[4][6]=2;
+            this.Plateau[4][2]=1;
+            this.Plateau[4][3]=1;
+            this.Plateau[4][5]=1;
+            this.Plateau[4][6]=1;
 
-            this.Plateau[2][4]=2;
-            this.Plateau[3][4]=2;
-            this.Plateau[5][4]=2;
-            this.Plateau[6][4]=2;
+            this.Plateau[2][4]=1;
+            this.Plateau[3][4]=1;
+            this.Plateau[5][4]=1;
+            this.Plateau[6][4]=1;
 
             //Placement du Roi
             this.Plateau[4][4]=3;
@@ -103,9 +107,13 @@ public class PlateauJoueur{
             this.Plateau[x2][y2]=this.Plateau[x1][y1];
             this.Plateau[x1][y1]=0;
             Lmove.add(move);
-            if(x1==4 && y1==4){
-                Lmove.add("trone");
-                this.Plateau[4][4]=5;
+            if(this.Plateau[x2][y2]==3){
+                this.VictoireBlanc=this.Final(x2,y2);
+
+                if(x1==4 && y1==4){
+                    this.Plateau[4][4]=5;
+               }
+
             }
             this.Consequences(x2,y2);//effectue les suppressions de pions ou Roi si le mouvement effectué le permet
             return true;
@@ -129,10 +137,9 @@ public class PlateauJoueur{
          */
         public void Consequences(int x, int y){
 
-            // !!!!!Attention la suppression du roi n'est pas faites !!!!!
-
             if(x-2>=0 && this.CompareCouleur(this.Plateau[x-2][y], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x-1][y], this.Plateau[x][y])==1){
                 if(this.Plateau[x-1][y]!=3){
+                    this.RetirePion(this.Plateau[x-1][y]);
                     Lmove.add("%n"+this.Plateau[x-1][y]+" %n"+(x-1)+" %n"+y);
                     this.Plateau[x-1][y]=0;
                 }
@@ -146,6 +153,7 @@ public class PlateauJoueur{
             }
             if(x+2<9 && this.CompareCouleur(this.Plateau[x+2][y], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x+1][y], this.Plateau[x][y])==1){
                 if(this.Plateau[x+1][y]!=3){
+                    this.RetirePion(this.Plateau[x+1][y]);
                     Lmove.add("%n"+this.Plateau[x+1][y]+" %n"+(x+1)+" %n"+y);
                     this.Plateau[x+1][y]=0;
                 }
@@ -159,6 +167,7 @@ public class PlateauJoueur{
             }
             if(y-2>=0 && this.CompareCouleur(this.Plateau[x][y-2], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x][y-1], this.Plateau[x][y])==1){
                 if(this.Plateau[x][y-1]!=3){
+                    this.RetirePion(this.Plateau[x][y-1]);
                     Lmove.add("%n"+this.Plateau[x][y-1]+" %n"+x+" %n"+(y-1));
                     this.Plateau[x][y-1]=0;
                  }
@@ -172,6 +181,7 @@ public class PlateauJoueur{
             }
             if(y+2>=0 && this.CompareCouleur(this.Plateau[x][y+2], this.Plateau[x][y])==0 && this.CompareCouleur(this.Plateau[x][y+1], this.Plateau[x][y])==1){
                 if(this.Plateau[x][y+1]!=3){
+                    this.RetirePion(this.Plateau[x][y+1]);
                     Lmove.add("%n"+this.Plateau[x][y+1]+" %n"+x+" %n"+(y+1));
                     this.Plateau[x][y+1]=0;
                 }
@@ -201,11 +211,9 @@ public class PlateauJoueur{
                 y1=Integer.parseInt(mouvement[1])-1;
                 x2=Integer.parseInt(mouvement[2])-1;
                 y2=Integer.parseInt(mouvement[3])-1;
-                if(x1>=0 && x1<=8 && y1>=0 && y1<=8 && x2>=0 && x2<=8 && y2>=0 && y2<=8){
-                    this.Plateau[x1][y1]=this.Plateau[x2][y2];
-                    this.Plateau[x2][y2]=0;
-                    this.Lmove.removeElementAt(this.Lmove.size()-1);
-                }
+                this.Plateau[x1][y1]=this.Plateau[x2][y2];
+                this.Plateau[x2][y2]=0;
+                this.Lmove.removeElementAt(this.Lmove.size()-1);
             }
             else if(taille==3){
                 int pion,x,y;
@@ -213,18 +221,13 @@ public class PlateauJoueur{
                 x=Integer.parseInt(mouvement[1])-1;
                 y=Integer.parseInt(mouvement[2])-1;
 
-                if(x<=8 && x>=0 && y<=8 && y>=0){
-                    this.Plateau[x][y]=pion;
-                    this.Lmove.removeElementAt(this.Lmove.size()-1);
-                    if(pion==3) this.VictoireNoir=false;
-                    this.AnnuleDernierCoup();   //ce n'est pas un coup mais une suppression de pion qu'on a annulé!! il faut annuler le mouvement du pion responsable de cette suppression maintenant
-                }
-            }
-            else if(taille==1){
-                if(move.compareTo("trone")==0){
-                    this.AnnuleDernierCoup();    //ce n'est pas un coup mais un changement d'etat pour le trone !! il faut annuler le mouvement du roi responsable de ce changement
-                }
+                this.AjoutePion(pion);
 
+                this.Plateau[x][y]=pion;
+                this.Lmove.removeElementAt(this.Lmove.size()-1);
+                if(pion==3) this.VictoireNoir=false;
+                this.AnnuleDernierCoup();   //ce n'est pas un coup mais une suppression de pion qu'on a annulé!! il faut annuler le mouvement du pion responsable de cette suppression maintenant
+                
             }
         }
 
@@ -326,23 +329,19 @@ public class PlateauJoueur{
         	
         	for(int i=0;i<9;i++){
         		for(int j=0;j<9;j++){
-        			if(this.Color(this.Plateau[i][j])==1){
-	        			if(this.Plateau[i][j]==1){
+	        		if(this.Plateau[i][j]==1){
 	        				HeuristiqueBlanc+=this.Liberte(i,j);
 	        				HeuristiqueBlanc+=this.Mangeable(i,j);
-	        				HeuristiqueBlanc+=this.Mangeur(myColor,i,j);
-	        			}
-	        			else{
+                                                HeuristiqueBlanc+=this.nb_pion_blanc;
+	        		}
+	        		else if(this.Plateau[i][j]==3){
 	        				HeuristiqueBlanc+=this.Liberte(i,j);
 	        				HeuristiqueBlanc+=this.Mangeable(i,j);
-	        				HeuristiqueBlanc+=this.Mangeur(i,j);
-
-	        			}
         			}
-        			else if(this.Color(this.Plateau[i][j])==2){
+        			else if(this.Plateau[i][j]==2){
         				HeuristiqueNoir+=this.Liberte(i,j);
         				HeuristiqueNoir+=this.Mangeable(i,j);
-        				HeuristiqueNoir+=this.Mangeur(i,j);
+                                        HeuristiqueBlanc+=this.nb_pion_noir;
         			}
         		}
         	}
@@ -350,12 +349,6 @@ public class PlateauJoueur{
         	return 0;
         }
 
-        
-        public int Mangeur(int xi, int yi){
-        	
-        	return
-        }
-        
         /**
          * renvoit le nombre de pion qui peuvent manger un pion placer sur une case
          * @param xf	abscisse de la case
@@ -468,5 +461,35 @@ public class PlateauJoueur{
         	else if(pion==2)return 1;
         	else return 0;
         	
+        }
+
+        /**
+         * retire un pion mange des effectifs de pion lorsqu'un pion est mange
+         * @param p le pion mangé
+         */
+        public void RetirePion(int p){
+            if(p==1) this.nb_pion_blanc--;
+            else this.nb_pion_noir--;
+        }
+
+
+        /**
+         * ajoute un pion mange des effectifs de pion lors d'une annulation de mouvement
+         * @param p le pion mangé
+         */
+        public void AjoutePion(int p){
+            if(p==1) this.nb_pion_blanc++;
+            else this.nb_pion_noir++;
+        }
+
+        /**
+         * indique si la dame est en sureté et que la partie est finie
+         * @param i case abscisse de la dame
+         * @param j case ordonnée de la dame
+         * @return  true si en surete, false sinon
+         */
+        public boolean Final(int i, int j){
+            if(((i==0 || i==8) && (j>2 && j<6)) || ((j==0 || j==8) && (i>2 && i<6))) return true;
+            else return false;
         }
 }
