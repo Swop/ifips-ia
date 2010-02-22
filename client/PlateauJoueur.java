@@ -197,7 +197,7 @@ public class PlateauJoueur{
 
 
         /**
-         * annule un coup enregistré préhalablement
+         * annule un coup enregistré préalablement
          * @param coup le coup a annuler (deplacement de pion ou prise de pion)
          */
         public void Annulation(String move){

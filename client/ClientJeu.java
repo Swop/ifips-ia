@@ -67,7 +67,7 @@ public class ClientJeu {
 			
 			// Envoie de l'identifiant de votre binome.
 			out.println(joueur.quadriName());
-			System.out.println("Mon nom de quadrinome envoy� est " + joueur.quadriName());
+			System.out.println("Mon nom de quadrinome envoyé est " + joueur.quadriName());
 			
 			// R�cup�re le message sous forme de chaine de caract�res
 			msg = in.readLine();
@@ -76,7 +76,7 @@ public class ClientJeu {
 			// Lit le contenu du message, toutes les infos du message
 			msgTokenizer = new StringTokenizer(msg, " \n\0");
 			if ((msgTokenizer.nextToken()).equals("Blanc")) {
-				System.out.println("Je suis Blanc, je commence. Je dois d�fendre mon v�n�r� Roi Blanc.");
+				System.out.println("Je suis Blanc, je commence. Je dois défendre mon vénéré Roi Blanc.");
 				maCouleur = BLANC;
 			} else { // doit etre �gal � "Noir"
 				System.out.println("Je suis Noir, c'est ennemi qui commence. Je dois capturer ce maudit Roi.");
@@ -105,7 +105,7 @@ public class ClientJeu {
 					}
 					
 					if( couleurAJouer == maCouleur )
-						System.out.println("J'ai gagn�");
+						System.out.println("J'ai gagné");
 					
 					joueur.declareLeVainqueur(couleurAJouer);
 				}
