@@ -281,7 +281,6 @@ public class PlateauJoueur{
         	
         	Vector<String> mesMouv = new Vector<String>();
         	
-        	if(this.Plateau[xf][yf]!=0) return mesMouv;
         	
         	if(xf<8){
 	        	for(int i=xf+1;i<=8;i++){
