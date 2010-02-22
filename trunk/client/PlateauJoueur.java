@@ -4,8 +4,6 @@
  */
 
 package client;
-import java.lang.String;
-import java.util.Vector;
 import java.util.Vector;
 
 /**
@@ -198,7 +196,7 @@ public class PlateauJoueur{
 
         /**
          * annule un coup enregistré préalablement
-         * @param coup le coup a annuler (deplacement de pion ou prise de pion)
+         * @param move le coup a annuler (deplacement de pion ou prise de pion)
          */
         public void Annulation(String move){
             String[] mouvement;
@@ -236,9 +234,9 @@ public class PlateauJoueur{
          * compare les valeurs de deux cases afin de voir si un pion peux etre mangé entre les deux
          * @param   case1 la valeur de la case1
          * @param   case2 la valeur de la case2
-         * @return  0 si les deux pions sur ces cases permettent de manger un pion entre elles
-         * @return  1 si les deux pions sont de couleur differentes et ne permettent pas de manger un pion entre elles
-         * @return  2 si les deux cases ne permettent pas de manger un pion entre elles
+         * @return  0 si les deux pions sur ces cases permettent de manger un pion entre elles;
+	 *  1 si les deux pions sont de couleur differentes et ne permettent pas de manger un pion entre elles;
+	 *  2 si les deux cases ne permettent pas de manger un pion entre elles
          */
         public int CompareCouleur(int case1, int case2){
             if(case1*case2==0 || case1==4 || case2==4) return 2;
