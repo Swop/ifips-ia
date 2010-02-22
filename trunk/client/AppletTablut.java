@@ -1,4 +1,4 @@
-package tablut;
+package tablut-client;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
