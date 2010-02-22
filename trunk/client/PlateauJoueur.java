@@ -247,6 +247,11 @@ public class PlateauJoueur{
             else return 404;
         }
 
+        /**
+         * genere tout les mouvements possibles pour une couleur
+         * @param color la couleur a jouer
+         * @return  l'ensemble des mouvements possibles pour une couleur
+         */
         public Vector<String> ToutLesMouvs(int color){
 
             Vector<String> ToutmesMouv = new Vector<String>();
@@ -260,7 +265,7 @@ public class PlateauJoueur{
 
                     }
                 }
-           }
+            }
 
             return ToutmesMouv;
 
@@ -365,11 +370,11 @@ public class PlateauJoueur{
         	}
 
 
-                HeuristiqueBlanc+=this.nb_pion_noir;
+                HeuristiqueNoir+=this.nb_pion_noir;
                 HeuristiqueBlanc+=this.nb_pion_blanc;
 
-        	
-        	return 0;
+                if(myColor==1) return HeuristiqueBlanc-HeuristiqueNoir;
+                else  return HeuristiqueNoir-HeuristiqueBlanc;
         }
 
         /**
