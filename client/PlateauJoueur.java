@@ -379,7 +379,7 @@ public class PlateauJoueur{
          * renvoit le nombre de pion qui peuvent manger un pion placer sur une case
          * @param xf	abscisse de la case
          * @param yf	ordonnee de la case
-         * @return		nombre de pions mangeur
+         * @return	nombre de pions mangeur
          */
         public int Mangeable(int xf, int yf){
         	
@@ -427,7 +427,7 @@ public class PlateauJoueur{
          * renvoit le degre de liberte d'un pion, c'est a dire le nombre de case ou il peut se deplacer
          * @param xf	abscisse du pion
          * @param yf	ordonnee du pion
-         * @return		nombre de cases accessibles
+         * @return	nombre de cases accessibles
          */
         public int Liberte(int xf, int yf){
         	
@@ -467,7 +467,7 @@ public class PlateauJoueur{
         /**
          * renvoit la couleur du pion
          * @param pion
-         * @return	0 si le pion est 'null', 1 si il est blanc, 2 si il est noir
+         * @return 0 si le pion est 'null', 1 si il est blanc, 2 si il est noir
          */
         public int Color(int pion){
         	if(pion==1 || pion==3)return 1;
@@ -510,8 +510,8 @@ public class PlateauJoueur{
 
         /**
          * indique si la dame est en sureté et que la partie est finie
-         * @param i case abscisse de la dame
-         * @param j case ordonnée de la dame
+         * @param i case abscisse du roi
+         * @param j case ordonnée du roi
          * @return  true si en surete, false sinon
          */
         public boolean Final(int i, int j){
