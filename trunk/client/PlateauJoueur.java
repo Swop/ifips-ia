@@ -247,6 +247,26 @@ public class PlateauJoueur{
             else return 404;
         }
 
+        public Vector<String> ToutLesMouvs(int color){
+
+            Vector<String> ToutmesMouv = new Vector<String>();
+            Vector<String> Mouvtmp = new Vector<String>();
+
+
+            for(int i=0;i<9;i++){
+                for(int j=0;j<9;j++){
+                    if(this.Color(this.Plateau[i][j])==color){
+                        ToutmesMouv.addAll(this.GenereMouvements(color, j, j));
+
+                    }
+                }
+           }
+
+            return ToutmesMouv;
+
+        }
+
+
         /**
          * renvoit les mouvements possibles pour amener un pion d une couleur donnee a une case
          * @param myColor	la couleur du joueur
