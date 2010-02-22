@@ -1,4 +1,4 @@
-package tablut;
+package client;
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -7,13 +7,13 @@ import java.util.*;
  * Cette classe permet de charger dynamiquement une classe de joueur,
  * qui doit obligatoirement implanter l'interface IJoueur. Vous lui
  * donnez aussi en argument le nom de la machine distante (ou "localhost")
- * sur laquelle le serveur de jeu est lancé, ainsi que le port sur lequel
- * la machine écoute.
+ * sur laquelle le serveur de jeu est lancï¿½, ainsi que le port sur lequel
+ * la machine ï¿½coute.
  *
  * Exemple: >java -cp . tablut/ClientJeu tablut.joueurProf localhost 1234
  * 
- * Le client s'occupe alors de tout en lançant les méthodes implantées de l'interface
- * IJoueur. Toute la gestion réseau est donc cachée.
+ * Le client s'occupe alors de tout en lanï¿½ant les mï¿½thodes implantï¿½es de l'interface
+ * IJoueur. Toute la gestion rï¿½seau est donc cachï¿½e.
  * 
  * @author L. Simon (Univ. Paris-Sud)- 2006
  * @see IJoueur
@@ -34,11 +34,11 @@ public class ClientJeu {
 			System.exit(1);
 		}
 		
-		// Le nom de la classe joueur à charger dynamiquement
+		// Le nom de la classe joueur ï¿½ charger dynamiquement
 		String classeJoueur = args[0];
-		// Le nom de la machine serveur a été donné en ligne de commande
+		// Le nom de la machine serveur a ï¿½tï¿½ donnï¿½ en ligne de commande
 		String serverMachine = args[1];
-		// Le numéro du port sur lequel on se connecte a aussi été donné
+		// Le numï¿½ro du port sur lequel on se connecte a aussi ï¿½tï¿½ donnï¿½
 		int portNum = Integer.parseInt(args[2]);
 		
 		System.out.println("Le client se connectera sur " + serverMachine + ":" + portNum);
@@ -46,7 +46,7 @@ public class ClientJeu {
 		Socket clientSocket = null;
 		IJoueur joueur; 
 		String msg, firstToken;
-		StringTokenizer msgTokenizer; // permet d'analyser les chaines de caractères lues
+		StringTokenizer msgTokenizer; // permet d'analyser les chaines de caractï¿½res lues
 		int couleurAJouer; // C'est la couleur qui doit jouer le prochain coup
 		int maCouleur; // C'est ma couleur (quand je joue)
 		
@@ -67,18 +67,18 @@ public class ClientJeu {
 			
 			// Envoie de l'identifiant de votre binome.
 			out.println(joueur.quadriName());
-			System.out.println("Mon nom de quadrinome envoyé est " + joueur.quadriName());
+			System.out.println("Mon nom de quadrinome envoyï¿½ est " + joueur.quadriName());
 			
-			// Récupère le message sous forme de chaine de caractères
+			// Rï¿½cupï¿½re le message sous forme de chaine de caractï¿½res
 			msg = in.readLine();
 			System.out.println(msg);
 			
 			// Lit le contenu du message, toutes les infos du message
 			msgTokenizer = new StringTokenizer(msg, " \n\0");
 			if ((msgTokenizer.nextToken()).equals("Blanc")) {
-				System.out.println("Je suis Blanc, je commence. Je dois défendre mon vénéré Roi Blanc.");
+				System.out.println("Je suis Blanc, je commence. Je dois dï¿½fendre mon vï¿½nï¿½rï¿½ Roi Blanc.");
 				maCouleur = BLANC;
-			} else { // doit etre égal à "Noir"
+			} else { // doit etre ï¿½gal ï¿½ "Noir"
 				System.out.println("Je suis Noir, c'est ennemi qui commence. Je dois capturer ce maudit Roi.");
 				maCouleur = NOIR;
 			}
@@ -86,7 +86,7 @@ public class ClientJeu {
 			// permet d'initialiser votre joueur avec sa couleur
 			joueur.initJoueur(maCouleur);
 			
-			do { // boucle générale de jeu
+			do { // boucle gï¿½nï¿½rale de jeu
 				
 				msg = in.readLine(); // Read the msg from the server
 				System.out.println(msg);
@@ -105,7 +105,7 @@ public class ClientJeu {
 					}
 					
 					if( couleurAJouer == maCouleur )
-						System.out.println("J'ai gagné");
+						System.out.println("J'ai gagnï¿½");
 					
 					joueur.declareLeVainqueur(couleurAJouer);
 				}
@@ -122,7 +122,7 @@ public class ClientJeu {
 						out.println(msg);
 					}
 				} else if (firstToken.equals("MOUVEMENT")) {
-					// On lit ce que joue le joueur et on l'envoie à l'autre
+					// On lit ce que joue le joueur et on l'envoie ï¿½ l'autre
 					departLigne = Integer.parseInt(msgTokenizer.nextToken());
 					departColonne = Integer.parseInt(msgTokenizer.nextToken());
 					arriveeLigne = Integer.parseInt(msgTokenizer.nextToken());

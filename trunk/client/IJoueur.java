@@ -1,4 +1,4 @@
-package tablut;
+package client;
 
 /**
  * Voici l'interface abstraite qu'il suffit d'implanter pour jouer.
@@ -18,19 +18,19 @@ public interface IJoueur {
 	static final int BLANC = 1;  // Mais pas lors de la conversation avec l'arbitre
 	
 	/**
-	 * L'arbitre vient de lancer votre joueur. Il lui informe par cette méthode
-	 * que vous devez jouer dans cette couleur. Vous pouvez utiliser cette méthode
-	 * abstraite, ou la méthode constructeur de votre classe, pour initialiser
+	 * L'arbitre vient de lancer votre joueur. Il lui informe par cette mï¿½thode
+	 * que vous devez jouer dans cette couleur. Vous pouvez utiliser cette mï¿½thode
+	 * abstraite, ou la mï¿½thode constructeur de votre classe, pour initialiser
 	 * vos structures.
 	 * @param mycolour La couleur dans laquelle vous allez jouer (1=BLANC, 2=NOIR)
 	 */
 	public void initJoueur(int mycolour);
 
 	/**
-	 * C'est ici que vous devez faire appel à votre IA pour trouver le meilleur coup à jouer
+	 * C'est ici que vous devez faire appel ï¿½ votre IA pour trouver le meilleur coup ï¿½ jouer
 	 * sur le plateau courant.
 	 * 
-	 * @return une chaine décrivant le mouvement. Cette chaine doit être décrite exactement comme sur l'exemple :
+	 * @return une chaine dï¿½crivant le mouvement. Cette chaine doit ï¿½tre dï¿½crite exactement comme sur l'exemple :
 	 * String msg = "" + lignePiece + " " + colonnePiece + " " + ligneDestination + " " + colonneDestination + '\0';
 	 * System.out.println("Voici mon mouvement : " + msg);
 	 */
@@ -39,8 +39,8 @@ public interface IJoueur {
 
 	
 	/**
-	 * Méthode appelée par l'arbitre pour désigner le vainqueur. Vous pouvez en profiter pour
-	 * imprimer une bannière de joie... Si vous gagnez... 
+	 * Mï¿½thode appelï¿½e par l'arbitre pour dï¿½signer le vainqueur. Vous pouvez en profiter pour
+	 * imprimer une banniï¿½re de joie... Si vous gagnez... 
 	 * 
 	 * @param colour La couleur du gagnant (BLANC=1, NOIR=2).
 	 */
@@ -48,20 +48,20 @@ public interface IJoueur {
 	
 	
 	/**
-	 * On suppose que l'arbitre a vérifié que le mouvement ennemi était bien légal. Il vous informe
-	 * là du mouvement ennemi. A vous de répercuter ce mouvement dans vos structures. Comme
-	 * par exemple éliminer les pions que ennemi vient de vous prendre par ce mouvement.
-	 * Il n'est pas nécessaire de réfléchir déjà à votre prochain coup à jouer : pour cela
+	 * On suppose que l'arbitre a vï¿½rifiï¿½ que le mouvement ennemi ï¿½tait bien lï¿½gal. Il vous informe
+	 * lï¿½ du mouvement ennemi. A vous de rï¿½percuter ce mouvement dans vos structures. Comme
+	 * par exemple ï¿½liminer les pions que ennemi vient de vous prendre par ce mouvement.
+	 * Il n'est pas nï¿½cessaire de rï¿½flï¿½chir dï¿½jï¿½ ï¿½ votre prochain coup ï¿½ jouer : pour cela
 	 * l'arbitre appelera ensuite choixMouvement().
 	 * 
-	 * @param startRow Ligne de départ du mouvement (entre 0 et TAILLE-1), 
-	 *                 commençant en haut=0 à bas=(TAILLE-1)
-	 * @param startCol Colonne de départ du mouvement (entre 0 et TAILLE-1), 
-	 *                 commençant à gauche=0 à droite=(TAILLE-1)
-	 * @param finishRow Ligne d'arrivée du mouvement (entre 0 et TAILLE-1),
-	 *                  commençant en haut=0 à bas=(TAILLE-1)
-	 * @param finishCol Colonne d'arrivée du mouvement (entre 0 et TAILLE-1),
-	 * 	                commençant à gauche=0 à droite=(TAILLE-1)
+	 * @param startRow Ligne de dï¿½part du mouvement (entre 0 et TAILLE-1), 
+	 *                 commenï¿½ant en haut=0 ï¿½ bas=(TAILLE-1)
+	 * @param startCol Colonne de dï¿½part du mouvement (entre 0 et TAILLE-1), 
+	 *                 commenï¿½ant ï¿½ gauche=0 ï¿½ droite=(TAILLE-1)
+	 * @param finishRow Ligne d'arrivï¿½e du mouvement (entre 0 et TAILLE-1),
+	 *                  commenï¿½ant en haut=0 ï¿½ bas=(TAILLE-1)
+	 * @param finishCol Colonne d'arrivï¿½e du mouvement (entre 0 et TAILLE-1),
+	 * 	                commenï¿½ant ï¿½ gauche=0 ï¿½ droite=(TAILLE-1)
 	 */
 	public void mouvementEnnemi(int startRow, int startCol, int finishRow, int finishCol);
 
