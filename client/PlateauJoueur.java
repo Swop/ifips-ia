@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package tablut;
+package client;
 import java.lang.String;
 import java.util.Vector;
 import java.util.Vector;
