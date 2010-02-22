@@ -245,9 +245,9 @@ public class PlateauJoueur{
         }
 
         
-        public vector<String> GenereMouvements(int myColor,int xf,int yf){
+        public Vector<String> GenereMouvements(int myColor,int xf,int yf){
         	
-        	Vector<String> mesMouv = new Vector<String>;
+        	Vector<String> mesMouv = new Vector<String>();
         	
         	if(xf<8){
 	        	for(int i=xf+1;i<=8;i++){
@@ -296,7 +296,7 @@ public class PlateauJoueur{
 	        		}
 	        	}
         	}
-        	
+		return mesMouv;
         }
         
         
