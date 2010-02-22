@@ -332,7 +332,6 @@ public class PlateauJoueur{
 	        		if(this.Plateau[i][j]==1){
 	        				HeuristiqueBlanc+=this.Liberte(i,j);
 	        				HeuristiqueBlanc+=this.Mangeable(i,j);
-                                                HeuristiqueBlanc+=this.nb_pion_blanc;
 	        		}
 	        		else if(this.Plateau[i][j]==3){
 	        				HeuristiqueBlanc+=this.Liberte(i,j);
@@ -341,10 +340,14 @@ public class PlateauJoueur{
         			else if(this.Plateau[i][j]==2){
         				HeuristiqueNoir+=this.Liberte(i,j);
         				HeuristiqueNoir+=this.Mangeable(i,j);
-                                        HeuristiqueBlanc+=this.nb_pion_noir;
         			}
         		}
         	}
+
+
+                HeuristiqueBlanc+=this.nb_pion_noir;
+                HeuristiqueBlanc+=this.nb_pion_blanc;
+
         	
         	return 0;
         }
