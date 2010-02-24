@@ -12,7 +12,11 @@ import java.util.Vector;
  */
 public class PlateauJoueur{
 	
-	
+	public static int NOIR = 2;
+	public static int BLANC = 1;
+	public static int ROI = 3;
+	public static int MUR = 4;
+
 	boolean VictoireNoir;
 	boolean VictoireBlanc;
         int nb_pion_blanc;
