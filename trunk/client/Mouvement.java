@@ -62,8 +62,10 @@ public class Mouvement {
 
 	if(orig.getContenu() == null) {
 	    int a = 1;
+	    System.out.println("Pas de pion han!");
+	    return listeMouvementPoubelle;
 	}
-
+    System.out.println("Ca marche");
 	TypePion type = orig.getContenu().getType();
 	p.deplacerPion(orig, dest);
 
