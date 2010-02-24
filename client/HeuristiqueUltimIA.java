@@ -93,32 +93,36 @@ public class HeuristiqueUltimIA implements IHeuristique {
     	}
     	int encercleRoi = 0;
     	try{
-	    	if(p.getCase(p.getPlaceRoi().getX()+1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR){
+	    	if(p.getCase(p.getPlaceRoi().getX()+1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
+	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()+1,
+	    					p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getX()-1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR){
+	    	if(p.getCase(p.getPlaceRoi().getX()-1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
+	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()+1,
+	    			p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || p.getCase(p.getPlaceRoi().getY()+1,
-	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR){
+	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
+	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getY()+1,
+	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || p.getCase(p.getPlaceRoi().getY()+1,
-	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR){
+	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
+	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getY()+1,
+	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;

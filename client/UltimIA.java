@@ -31,11 +31,11 @@ public class UltimIA implements IJoueur {
 	return methode_descente.trouveMeilleurCoup(heuristique, p, color);
     }
 
-    public void declareLeVainqueur(int colour) {
-	System.out.print("Le vainqueur est le joueur ");
-	if(colour == ClientJeu.BLANC)
+    public void declareLeVainqueur(int couleur) {
+	System.out.print("Le vainqueur est le joueur "+couleur+" : ");
+	if(couleur == ClientJeu.BLANC)
 	    System.out.println("Le Roy est sain et sauf ! Vive le Roy !");
-	else if(colour == ClientJeu.NOIR)
+	else if(couleur == ClientJeu.NOIR)
 	    System.out.println("Le peuple a vaincu ! Le Roy à la guillotine !");
 	else
 	    System.out.println("Il n'y a pas de vainqueur ... Match nul !!");
