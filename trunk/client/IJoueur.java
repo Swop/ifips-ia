@@ -70,6 +70,13 @@ public interface IJoueur {
 	 */
 	public String quadriName();
 
+	// Rajouté pour le bon fonctionnement de l'appli
+	/**
+	 *
+	 * @return La couleur du joueur
+	 */
+	public int getColor();
+
 	
 }
 
