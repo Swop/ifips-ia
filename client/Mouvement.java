@@ -58,41 +58,43 @@ public class Mouvement {
     }
 
     public ArrayList<Mouvement> appliquerMouvement(Plateau p) throws HorsJeuException {
-	ArrayList<Mouvement> listeMouvementPoubelle = new ArrayList<Mouvement>();
-
-	if(orig.getContenu() == null) {
-	    int a = 1;
-	    System.out.println("Pas de pion han!");
-	    return listeMouvementPoubelle;
-	}
-    System.out.println("Ca marche");
-	TypePion type = orig.getContenu().getType();
-	p.deplacerPion(orig, dest);
-
-	if(dest.getType() != TypeCase.POUBELLE) {
-	    /* Si il ne s'agit pas d'un mouvement d'une piece vers la poubelle, on cherche a savoir
-	    si ce mouvement entraine la prise de pions adverses */
-
-	    Mouvement pieceMangee;
-	    // ----- Detection des pieces mangees
-	    // Detection a droite
-	    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 1, 0);
-	    if(pieceMangee != null)
-		listeMouvementPoubelle.add(pieceMangee);
-	    // Detection a gauche
-	    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, -1, 0);
-	    if(pieceMangee != null)
-		listeMouvementPoubelle.add(pieceMangee);
-	    // Detection en haut
-	    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 0, -1);
-	    if(pieceMangee != null)
-		listeMouvementPoubelle.add(pieceMangee);
-	    // Detection en bas
-	    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 0, 1);
-	    if(pieceMangee != null)
-		listeMouvementPoubelle.add(pieceMangee);
-	}
-	return listeMouvementPoubelle;
+		ArrayList<Mouvement> listeMouvementPoubelle = new ArrayList<Mouvement>();
+	
+		if(orig.getContenu() == null) {
+		    int a = 1;
+		   //System.out.println("Pas de pion han!");
+		    return listeMouvementPoubelle;
+		}
+	    //System.out.println("Ca marche");
+		TypePion type = orig.getContenu().getType();
+		p.deplacerPion(orig, dest);
+		if(orig.getContenu().getType() == TypePion.ROI)
+			p.setPlaceRoi(dest);
+	
+		if(dest.getType() != TypeCase.POUBELLE) {
+		    /* Si il ne s'agit pas d'un mouvement d'une piece vers la poubelle, on cherche a savoir
+		    si ce mouvement entraine la prise de pions adverses */
+	
+		    Mouvement pieceMangee;
+		    // ----- Detection des pieces mangees
+		    // Detection a droite
+		    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 1, 0);
+		    if(pieceMangee != null)
+			listeMouvementPoubelle.add(pieceMangee);
+		    // Detection a gauche
+		    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, -1, 0);
+		    if(pieceMangee != null)
+			listeMouvementPoubelle.add(pieceMangee);
+		    // Detection en haut
+		    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 0, -1);
+		    if(pieceMangee != null)
+			listeMouvementPoubelle.add(pieceMangee);
+		    // Detection en bas
+		    pieceMangee = mangerPieceEventuelleSurUnCote(type, dest, 0, 1);
+		    if(pieceMangee != null)
+			listeMouvementPoubelle.add(pieceMangee);
+		}
+		return listeMouvementPoubelle;
     }
 
     private Mouvement mangerPieceEventuelleSurUnCote(TypePion type, Case dest, int diff_x, int diff_y) {

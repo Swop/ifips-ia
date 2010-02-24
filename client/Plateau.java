@@ -26,7 +26,7 @@ public class Plateau {
     private Poubelle poubelle;
     private ArrayList<Pion> pionsBlanc;
     private ArrayList<Pion> pionsNoir;
-
+    private Case placeRoi;
 
     private Plateau() {
 	pionsBlanc = new ArrayList<Pion>();
@@ -147,6 +147,7 @@ public class Plateau {
 	p = new Roi();
 	pionsBlanc.add(p);
 	cases[4][4].ajouterPion(p);
+	placeRoi = p.getPere();
     }
 
     public final synchronized static Plateau getInstance() {
@@ -199,7 +200,7 @@ public class Plateau {
 	return list;
     }
 
-    private ArrayList<Mouvement> getMouvementsPossiblesPourUnPoint(Case c) {
+    public ArrayList<Mouvement> getMouvementsPossiblesPourUnPoint(Case c) {
 	ArrayList<Mouvement> list = new ArrayList<Mouvement>();
 	int x = c.getX();
 	int y = c.getY();
@@ -271,4 +272,28 @@ public class Plateau {
 
 	return list;
     }
+
+    public Case getPlaceRoi(){
+    	return placeRoi;
+    }
+
+    public void setPlaceRoi(Case c){
+    	placeRoi = c;
+    }
+
+    public int getNbMyPions(int couleur){
+    	if(couleur == ClientJeu.BLANC)
+    	    return pionsBlanc.size();
+    	else
+    	    return pionsNoir.size();
+    }
+    
+    public int getNbYourPions(int couleur){
+    	if(couleur == ClientJeu.BLANC)
+    	    return pionsNoir.size();
+    	else
+    	    return pionsBlanc.size();
+    }
 }
+
+	

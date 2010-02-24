@@ -32,7 +32,7 @@ public class DescenteNegAB implements IDescente {
     public String trouveMeilleurCoup(IHeuristique heuristique, Plateau p, int couleur_joueur) {
 	while(!mouvements.estVide())
 	    mouvements.depiler();
-	System.out.println(mouvements);
+	//System.out.println(mouvements);
 	int best = Integer.MIN_VALUE;
 	int idBest = -1;
 	int profondeur = 2;
@@ -89,7 +89,7 @@ public class DescenteNegAB implements IDescente {
      * Alpha ou Beta en fonction du niveau
      */
     private int negAB(Plateau p, IHeuristique heuristique, int couleur_joueur, int profondeur, int a, int b) {
-	System.out.println(mouvements.toString());
+	//System.out.println(mouvements.toString());
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	if(mouv_possibles.size() == 0 || profondeur == 0){
 	    //lastMove = (Mouvement)mouvements.depiler();
@@ -111,7 +111,7 @@ public class DescenteNegAB implements IDescente {
 		// On effectue ensuite le mouvement inverse
 		lastMove = (Mouvement)(mouvements.depiler());
 		lastMove.appliquerMouvementInverse(p);
-		System.out.println(mouvements);
+		//System.out.println(mouvements);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(val > a){
 		a = val;
