@@ -77,6 +77,7 @@ public class DescenteNegAB implements IDescente {
 	    try {
 		mouvement_choisi.appliquerMouvement(p);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
+	    System.out.print(p.toString());
 	    return mouvement_choisi.toString();
 	} else{
 	    // Normalement, ici on ne peut plus jouer. Mais on rentre jamais dans ce else vu que le serveur nous aura deja signale la fin de la partie ...

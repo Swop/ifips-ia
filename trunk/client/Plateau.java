@@ -318,10 +318,10 @@ public class Plateau {
 	String ret="Plateau\n";
 	for(int i=0; i<9; i++){
 	    for(int j=0; j<9; j++){
-	    if(this.cases[i][j].getContenu()==null) ret.concat("0\t");
-	    else ret.concat(this.cases[i][j].getContenu().toString()+"\t");
+	    if(this.cases[i][j].getContenu()==null) ret+=".";
+	    else ret+=this.cases[i][j].getContenu().toString();
 	    }
-	ret.concat("\n");
+	ret+="\n";
 	}
 	return ret;
     }
