@@ -107,8 +107,7 @@ public class Mouvement {
 	    a_cote = Plateau.getInstance().getCase(dest.getX() + diff_x, dest.getY() + diff_y);
 	    deux_cases_plus_loin = Plateau.getInstance().getCase(dest.getX() + diff_x * 2, dest.getY() + diff_y * 2);
 
-	    if(a_cote.getType() != Case.TypeCase.MUR && a_cote.getType() != Case.TypeCase.TRONE &&
-		    a_cote.getContenu() != null &&
+	    if(a_cote.getType() != Case.TypeCase.MUR && a_cote.getContenu() != null &&
 		    Pion.getCouleurPion(a_cote.getContenu().getType()) == Pion.getCouleurPionAdverse(type)) {
 		// Une piece ennemie est a cote ...
 		switch(a_cote.getContenu().getType()) {
@@ -118,12 +117,12 @@ public class Mouvement {
 			Case case2 = null;
 			if(diff_x != 0) {
 			    // Si le roi est a droite ou a gauche, on considere les cases supperieures et inferieurs entourant le roi
-			    case1 = Plateau.getInstance().getCase(dest.getX(), dest.getY() + diff_y);
-			    case2 = Plateau.getInstance().getCase(dest.getX(), dest.getY() - diff_y);
+			    case1 = Plateau.getInstance().getCase(dest.getX(), dest.getY() + 1);
+			    case2 = Plateau.getInstance().getCase(dest.getX(), dest.getY() - 1);
 			} else {
 			    // Sinon on considere les cases les cases de droite et gauche entourant le roi
-			    case1 = Plateau.getInstance().getCase(dest.getX() + diff_x, dest.getY());
-			    case2 = Plateau.getInstance().getCase(dest.getX() - diff_x, dest.getY());
+			    case1 = Plateau.getInstance().getCase(dest.getX() + 1, dest.getY());
+			    case2 = Plateau.getInstance().getCase(dest.getX() - 1, dest.getY());
 			}
 			// A ce stade, les 4 cases entourant le roi existent, sinon on serait dans le catch ;-)
 			// On va compter le nombre de pions amis entourant le roi et le "nombre" de trone
