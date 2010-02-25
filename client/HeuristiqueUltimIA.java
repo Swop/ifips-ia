@@ -128,12 +128,12 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    	}
     	}
     	catch(HorsJeuException e){}
-    	if(encercleRoi == 4){
-    		if(couleur == ClientJeu.NOIR)
-    			return Integer.MAX_VALUE;
-    		else
-    			return Integer.MIN_VALUE;
-    	}
+    	if(p.getPlaceRoi().getContenu().isMort()){
+	    if(couleur == ClientJeu.BLANC)
+		return Integer.MIN_VALUE;
+	    else
+		return Integer.MAX_VALUE;
+	}
     	if(couleur == ClientJeu.BLANC)
     		eval += 3*(p.getMouvementsPossiblesPourUnPoint(p.getPlaceRoi()).size());
     	else
