@@ -63,12 +63,13 @@ public class Mouvement {
 		if(orig.getContenu() == null) {
 		    int a = 1;
 		   //System.out.println("Pas de pion han!");
+		    //System.out.println(p.toString());
 		    return listeMouvementPoubelle;
 		}
 	    //System.out.println("Ca marche");
 		TypePion type = orig.getContenu().getType();
 		p.deplacerPion(orig, dest);
-		if(orig.getContenu().getType() == TypePion.ROI)
+		if(type == TypePion.ROI)
 			p.setPlaceRoi(dest);
 	
 		if(dest.getType() != TypeCase.POUBELLE) {
