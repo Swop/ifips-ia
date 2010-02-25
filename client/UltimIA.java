@@ -5,6 +5,7 @@
 
 package client;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +51,11 @@ public class UltimIA implements IJoueur {
 	} catch (HorsJeuException ex) { /* Normalement, la validite du mouvement est controlle par l'arbitre ...*/ }
 	Mouvement m = new Mouvement(orig, dest);
 	try {
-	    m.appliquerMouvement(p);
+
+	    ArrayList<Mouvement> mouvementsPoubelle = m.appliquerMouvement(p);
+		for(Mouvement m2 : mouvementsPoubelle)
+		    m2.appliquerMouvement(p);
+
 	} catch (HorsJeuException ex) {/*Ici encore, d'apres l'arbire, il n'y a pas de soucis ... */}
         System.out.println("Plateau après mouvement ennemi :\n"+p.toString());
     }
