@@ -26,7 +26,7 @@ public class Plateau {
     private Poubelle poubelle;
     private ArrayList<Pion> pionsBlanc;
     private ArrayList<Pion> pionsNoir;
-    private Case placeRoi;
+    private Pion roi;
 
     private Plateau() {
 	pionsBlanc = new ArrayList<Pion>();
@@ -147,7 +147,7 @@ public class Plateau {
 	p = new Roi();
 	pionsBlanc.add(p);
 	cases[4][4].ajouterPion(p);
-	placeRoi = p.getPere();
+	roi = p;
     }
 
     public final synchronized static Plateau getInstance() {
@@ -273,12 +273,8 @@ public class Plateau {
 	return list;
     }
 
-    public Case getPlaceRoi(){
-    	return placeRoi;
-    }
-
-    public void setPlaceRoi(Case c){
-    	placeRoi = c;
+    public Pion getRoi(){
+	return roi;
     }
 
     public int getNbMyPions(int couleur){

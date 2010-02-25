@@ -69,8 +69,6 @@ public class Mouvement {
 	    //System.out.println("Ca marche");
 		TypePion type = orig.getContenu().getType();
 		p.deplacerPion(orig, dest);
-		if(type == TypePion.ROI)
-			p.setPlaceRoi(dest);
 	
 		if(dest.getType() != TypeCase.POUBELLE) {
 		    /* Si il ne s'agit pas d'un mouvement d'une piece vers la poubelle, on cherche a savoir
