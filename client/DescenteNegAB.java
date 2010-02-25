@@ -53,11 +53,17 @@ public class DescenteNegAB implements IDescente {
 	    System.out.println(mouvements.toString());
 	    try {
 		// Tant qu'il y a eu des suppression de pieces, on les remet sur le jeu
-		while(((Mouvement)mouvements.sommet()).getDest().getType() == Case.TypeCase.POUBELLE)
-		    ((Mouvement)(mouvements.depiler())).appliquerMouvementInverse(p);
+		while(((Mouvement)mouvements.sommet()).getDest().getType() == Case.TypeCase.POUBELLE) {
+                    System.out.println("Poubelle : "+((Mouvement)(mouvements.sommet())).toString());
+                    ((Mouvement)(mouvements.depiler())).appliquerMouvementInverse(p);
+                }
+                System.out.println("Pile après poubelle :");
+                System.out.println(mouvements.toString());
+		    
 		// On effectue ensuite le mouvement inverse
-		lastMove = (Mouvement)(mouvements.depiler());
+		
 		((Mouvement)mouvements.sommet()).appliquerMouvementInverse(p);
+                lastMove = (Mouvement)(mouvements.depiler());
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(best < negb){
 		best = negb;
@@ -120,6 +126,7 @@ public class DescenteNegAB implements IDescente {
 		// On effectue ensuite le mouvement inverse
 		lastMove = (Mouvement)(mouvements.depiler());
 		lastMove.appliquerMouvementInverse(p);
+                System.out.println("Remonte d'un cran ... Prof : "+profondeur);
 		//System.out.println(mouvements);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(val > a){
