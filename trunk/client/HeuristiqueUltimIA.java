@@ -21,36 +21,36 @@ public class HeuristiqueUltimIA implements IHeuristique {
      */
     public int evalue(Plateau p, int couleur) {
 	int eval = 0;
-    	if(p.getPlaceRoi().getX() == 0 && (p.getPlaceRoi().getY() == 3 || p.getPlaceRoi().getY() == 4 ||
-    			p.getPlaceRoi().getY() == 5)){
+    	if(p.getRoi().getPere().getX() == 0 && (p.getRoi().getPere().getY() == 3 || p.getRoi().getPere().getY() == 4 ||
+    			p.getRoi().getPere().getY() == 5)){
     		if(couleur == ClientJeu.BLANC)
     			return Integer.MAX_VALUE;
     		else
     			return Integer.MIN_VALUE;
     	}
-    	if(p.getPlaceRoi().getX() == 8 && (p.getPlaceRoi().getY() == 3 || p.getPlaceRoi().getY() == 4 ||
-    			p.getPlaceRoi().getY() == 5)){
+    	if(p.getRoi().getPere().getX() == 8 && (p.getRoi().getPere().getY() == 3 || p.getRoi().getPere().getY() == 4 ||
+    			p.getRoi().getPere().getY() == 5)){
     		if(couleur == ClientJeu.BLANC)
     			return Integer.MAX_VALUE;
     		else
     			return Integer.MIN_VALUE;
     	}
-    	if(p.getPlaceRoi().getY() == 0 && (p.getPlaceRoi().getX() == 3 || p.getPlaceRoi().getX() == 4 ||
-    			p.getPlaceRoi().getX() == 5)){
+    	if(p.getRoi().getPere().getY() == 0 && (p.getRoi().getPere().getX() == 3 || p.getRoi().getPere().getX() == 4 ||
+    			p.getRoi().getPere().getX() == 5)){
     		if(couleur == ClientJeu.BLANC)
     			return Integer.MAX_VALUE;
     		else
     			return Integer.MIN_VALUE;
     	}
-    	if(p.getPlaceRoi().getY() == 8 && (p.getPlaceRoi().getX() == 3 || p.getPlaceRoi().getX() == 4 ||
-    			p.getPlaceRoi().getX() == 5)){
+    	if(p.getRoi().getPere().getY() == 8 && (p.getRoi().getPere().getX() == 3 || p.getRoi().getPere().getX() == 4 ||
+    			p.getRoi().getPere().getX() == 5)){
     		if(couleur == ClientJeu.BLANC)
     			return Integer.MAX_VALUE;
     		else
     			return Integer.MIN_VALUE;
     	}
     	int nbCoupGagnant = 0;
-    	for(Mouvement m : p.getMouvementsPossiblesPourUnPoint(p.getPlaceRoi())){
+    	for(Mouvement m : p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere())){
     		if(m.getDest().getX() == 0 && (m.getDest().getY() == 3 || m.getDest().getY() == 4 || m.getDest().getY() == 5)){
     			nbCoupGagnant++;
     			if(nbCoupGagnant == 2){
@@ -90,36 +90,36 @@ public class HeuristiqueUltimIA implements IHeuristique {
     	}
     	int encercleRoi = 0;
     	try{
-	    	if(p.getCase(p.getPlaceRoi().getX()+1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()+1,
-	    					p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getRoi().getPere().getX()+1, p.getRoi().getPere().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getRoi().getPere().getX()+1,
+	    			p.getRoi().getPere().getY()).getContenu() != null && p.getCase(p.getRoi().getPere().getX()+1,
+	    					p.getRoi().getPere().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getX()-1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()-1,
-	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()-1,
-	    			p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getRoi().getPere().getX()-1, p.getRoi().getPere().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getRoi().getPere().getX()-1,
+	    			p.getRoi().getPere().getY()).getContenu() != null && p.getCase(p.getRoi().getPere().getX()-1,
+	    			p.getRoi().getPere().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getX(), p.getPlaceRoi().getY()+1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX(),
-	    			p.getPlaceRoi().getY()+1).getContenu() != null && p.getCase(p.getPlaceRoi().getX(),
-	    			p.getPlaceRoi().getY()+1).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getRoi().getPere().getX(), p.getRoi().getPere().getY()+1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getRoi().getPere().getX(),
+	    			p.getRoi().getPere().getY()+1).getContenu() != null && p.getCase(p.getRoi().getPere().getX(),
+	    			p.getRoi().getPere().getY()+1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getX(), p.getPlaceRoi().getY()-1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX(),
-	    			p.getPlaceRoi().getY()-1).getContenu() != null && p.getCase(p.getPlaceRoi().getX(),
-	    			p.getPlaceRoi().getY()-1).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getRoi().getPere().getX(), p.getRoi().getPere().getY()-1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getRoi().getPere().getX(),
+	    			p.getRoi().getPere().getY()-1).getContenu() != null && p.getCase(p.getRoi().getPere().getX(),
+	    			p.getRoi().getPere().getY()-1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
@@ -128,16 +128,16 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    	}
     	}
     	catch(HorsJeuException e){}
-    	if(p.getPlaceRoi().getContenu().isMort()){
+    	if(p.getRoi().getPere().getContenu().isMort()){
 	    if(couleur == ClientJeu.BLANC)
 		return Integer.MIN_VALUE;
 	    else
 		return Integer.MAX_VALUE;
 	}
     	if(couleur == ClientJeu.BLANC)
-    		eval += 3*(p.getMouvementsPossiblesPourUnPoint(p.getPlaceRoi()).size());
+    		eval += 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	else
-    		eval -= 3*(p.getMouvementsPossiblesPourUnPoint(p.getPlaceRoi()).size());
+    		eval -= 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	eval += p.getNbMyPions(couleur);
     	eval -= p.getNbYourPions(couleur);
     	
