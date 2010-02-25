@@ -60,4 +60,11 @@ public class Pion {
 	 else
 	     return ClientJeu.BLANC;
     }
+    @Override
+    public String toString() {
+	if(this.getType()==Pion.TypePion.BLANC) return "2";
+	if(this.getType()==Pion.TypePion.NOIR) return "1";
+	if(this.getType()==Pion.TypePion.ROI) return "3";
+	return "dummy";
+    }
 }
