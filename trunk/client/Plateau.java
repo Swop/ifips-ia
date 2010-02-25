@@ -282,17 +282,39 @@ public class Plateau {
     }
 
     public int getNbMyPions(int couleur){
-    	if(couleur == ClientJeu.BLANC)
-    	    return pionsBlanc.size();
-    	else
-    	    return pionsNoir.size();
+    	int pionsVivant = 0;
+	if(couleur == ClientJeu.BLANC){
+	    for(Pion p : pionsBlanc){
+		if(!p.isMort())
+		    pionsVivant++;
+	    }
+	    return pionsVivant;
+	}
+	else{
+	    for(Pion p : pionsNoir){
+		if(!p.isMort())
+		    pionsVivant++;
+	    }
+	    return pionsVivant;
+	}
     }
     
     public int getNbYourPions(int couleur){
-    	if(couleur == ClientJeu.BLANC)
-    	    return pionsNoir.size();
-    	else
-    	    return pionsBlanc.size();
+    	int pionsVivant = 0;
+	if(couleur == ClientJeu.BLANC){
+	    for(Pion p : pionsNoir){
+		if(!p.isMort())
+		    pionsVivant++;
+	    }
+	    return pionsVivant;
+	}
+	else{
+	    for(Pion p : pionsBlanc){
+		if(!p.isMort())
+		    pionsVivant++;
+	    }
+	    return pionsVivant;
+	}
     }
 }
 

@@ -20,6 +20,8 @@ public class HeuristiqueUltimIA implements IHeuristique {
      * Evalue le plateau donne en paramettre
      * @param p
      * Plateau de jeu
+     * @param couleur
+     * Couleur du joueur
      * @return
      * La valeur heuristique representative du plateau
      */
