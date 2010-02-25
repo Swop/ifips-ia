@@ -49,7 +49,7 @@ public class DescenteNegAB implements IDescente {
 		    m.appliquerMouvement(p);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    int negb = -negAB(p, heuristique, getCouleurEnnemi(couleur_joueur), profondeur-1,Integer.MIN_VALUE,Integer.MAX_VALUE);
-	    System.out.println("Retour en haut");
+	    System.out.println("Retour en haut. Heuristique : "+negb);
 	    System.out.println(mouvements.toString());
 	    try {
 		// Tant qu'il y a eu des suppression de pieces, on les remet sur le jeu
@@ -57,13 +57,14 @@ public class DescenteNegAB implements IDescente {
                     System.out.println("Poubelle : "+((Mouvement)(mouvements.sommet())).toString());
                     ((Mouvement)(mouvements.depiler())).appliquerMouvementInverse(p);
                 }
-                System.out.println("Pile après poubelle :");
-                System.out.println(mouvements.toString());
+                //System.out.println("Pile après poubelle :");
+                //System.out.println(mouvements.toString());
 		    
 		// On effectue ensuite le mouvement inverse
 		
 		((Mouvement)mouvements.sommet()).appliquerMouvementInverse(p);
                 lastMove = (Mouvement)(mouvements.depiler());
+                System.out.println("Mouvement associé : "+lastMove.toString());
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(best < negb){
 		best = negb;
@@ -72,6 +73,7 @@ public class DescenteNegAB implements IDescente {
 	}
 	if(idBest != -1) {
 	    Mouvement mouvement_choisi = mouv_possibles.get(idBest);
+            System.out.println("Meilleur H : "+best+" , Mouvement choisi : "+mouvement_choisi.toString());
 	    try {
 		mouvement_choisi.appliquerMouvement(p);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
@@ -100,14 +102,14 @@ public class DescenteNegAB implements IDescente {
      * Alpha ou Beta en fonction du niveau
      */
     private int negAB(Plateau p, IHeuristique heuristique, int couleur_joueur, int profondeur, int a, int b) {
-	System.out.println("Profondeur : "+profondeur);
-	System.out.println(mouvements.toString());
+	//System.out.println("Profondeur : "+profondeur);
+	//System.out.println(mouvements.toString());
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	if(mouv_possibles.size() == 0 || profondeur == 0){
 	    //lastMove = (Mouvement)mouvements.depiler();
 	    int heu = heuristique.evalue(p, couleur_joueur);
-	    System.out.println("Heuristique "+heu+", Profondeur : "+profondeur+", Pile : ");
-	    System.out.println(mouvements.toString());
+	    //System.out.println("Heuristique "+heu+", Profondeur : "+profondeur+", Pile : ");
+	    //System.out.println(mouvements.toString());
 	    return heuristique.evalue(p, couleur_joueur);
 	}
 	for(int i=0; i<mouv_possibles.size(); i++){
@@ -126,7 +128,7 @@ public class DescenteNegAB implements IDescente {
 		// On effectue ensuite le mouvement inverse
 		lastMove = (Mouvement)(mouvements.depiler());
 		lastMove.appliquerMouvementInverse(p);
-                System.out.println("Remonte d'un cran ... Prof : "+profondeur);
+                //System.out.println("Remonte d'un cran ... Prof : "+profondeur);
 		//System.out.println(mouvements);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(val > a){
