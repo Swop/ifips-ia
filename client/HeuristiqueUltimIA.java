@@ -10,13 +10,7 @@ package client;
  * @author swop
  */
 public class HeuristiqueUltimIA implements IHeuristique {
-    
-	/**
-	 * valeur de l'heuristique pour ce plateau
-	 */	
-	private int eval = 0;
-	
-	/**
+    /**
      * Evalue le plateau donne en paramettre
      * @param p
      * Plateau de jeu
@@ -26,6 +20,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
      * La valeur heuristique representative du plateau
      */
     public int evalue(Plateau p, int couleur) {
+	int eval = 0;
     	if(p.getPlaceRoi().getX() == 0 && (p.getPlaceRoi().getY() == 3 || p.getPlaceRoi().getY() == 4 ||
     			p.getPlaceRoi().getY() == 5)){
     		if(couleur == ClientJeu.BLANC)
@@ -104,8 +99,8 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getX()-1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()+1,
+	    	if(p.getCase(p.getPlaceRoi().getX()-1, p.getPlaceRoi().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()-1,
+	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getX()-1,
 	    			p.getPlaceRoi().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
@@ -113,18 +108,18 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getY()+1,
-	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getPlaceRoi().getX(), p.getPlaceRoi().getY()+1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX(),
+	    			p.getPlaceRoi().getY()+1).getContenu() != null && p.getCase(p.getPlaceRoi().getX(),
+	    			p.getPlaceRoi().getY()+1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
 	        	else
 	        		eval += 5*encercleRoi;
 	    	}
-	    	if(p.getCase(p.getPlaceRoi().getY()+1, p.getPlaceRoi().getX()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX()+1,
-	    			p.getPlaceRoi().getY()).getContenu() != null && p.getCase(p.getPlaceRoi().getY()+1,
-	    			p.getPlaceRoi().getX()).getContenu().getType() == Pion.TypePion.NOIR)){
+	    	if(p.getCase(p.getPlaceRoi().getX(), p.getPlaceRoi().getY()-1).getType() == Case.TypeCase.TRONE || (p.getCase(p.getPlaceRoi().getX(),
+	    			p.getPlaceRoi().getY()-1).getContenu() != null && p.getCase(p.getPlaceRoi().getX(),
+	    			p.getPlaceRoi().getY()-1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(couleur == ClientJeu.BLANC)
 	        		eval -= 5*encercleRoi;
