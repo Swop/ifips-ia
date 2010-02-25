@@ -24,8 +24,10 @@ public class DescenteNegAB implements IDescente {
      * Trouve le meilleur coup possible en lancant un NegAlphaBeta sur le plateau passee en parrametre, selon l'heuristique passee en parrametre.
      * @param heuristique
      * L'heuristique a utiliser pour evaluer les feuilles
-     * @param plateau
+     * @param p
      * Le plateau courant
+     * @param couleur_joueur
+     * Couleur du joueur
      * @return
      * Le coup a jouer
      */
@@ -38,6 +40,7 @@ public class DescenteNegAB implements IDescente {
 	int profondeur = 2;
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	for(int i=0; i<mouv_possibles.size(); i++){
+	    System.out.println("i : "+i);
 	    mouvements.empiler(mouv_possibles.get(i));
 	    try {
 		ArrayList<Mouvement> mouvementsPoubelle = mouv_possibles.get(i).appliquerMouvement(p);
@@ -46,12 +49,14 @@ public class DescenteNegAB implements IDescente {
 		    m.appliquerMouvement(p);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    int negb = -negAB(p, heuristique, getCouleurEnnemi(couleur_joueur), profondeur-1,Integer.MIN_VALUE,Integer.MAX_VALUE);
+	    System.out.println("Retour en haut");
+	    System.out.println(mouvements.toString());
 	    try {
 		// Tant qu'il y a eu des suppression de pieces, on les remet sur le jeu
 		while(((Mouvement)mouvements.sommet()).getDest().getType() == Case.TypeCase.POUBELLE)
 		    ((Mouvement)(mouvements.depiler())).appliquerMouvementInverse(p);
 		// On effectue ensuite le mouvement inverse
-		// A VOIR !!!!!!! -- lastMove = (Mouvement)(mouvements.depiler());
+		lastMove = (Mouvement)(mouvements.depiler());
 		((Mouvement)mouvements.sommet()).appliquerMouvementInverse(p);
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(best < negb){
@@ -89,10 +94,14 @@ public class DescenteNegAB implements IDescente {
      * Alpha ou Beta en fonction du niveau
      */
     private int negAB(Plateau p, IHeuristique heuristique, int couleur_joueur, int profondeur, int a, int b) {
-	//System.out.println(mouvements.toString());
+	System.out.println("Profondeur : "+profondeur);
+	System.out.println(mouvements.toString());
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	if(mouv_possibles.size() == 0 || profondeur == 0){
 	    //lastMove = (Mouvement)mouvements.depiler();
+	    int heu = heuristique.evalue(p, couleur_joueur);
+	    System.out.println("Heuristique "+heu+", Profondeur : "+profondeur+", Pile : ");
+	    System.out.println(mouvements.toString());
 	    return heuristique.evalue(p, couleur_joueur);
 	}
 	for(int i=0; i<mouv_possibles.size(); i++){
