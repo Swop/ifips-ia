@@ -62,13 +62,14 @@ public class Mouvement {
 	
 		if(orig.getContenu() == null) {
 		    int a = 1;
-		   //System.out.println("Pas de pion han!");
+		   System.out.println("Pas de pion han!");
 		    System.out.print(p.toString());
 		    return listeMouvementPoubelle;
 		}
 	    //System.out.println("Ca marche");
 		TypePion type = orig.getContenu().getType();
 		p.deplacerPion(orig, dest);
+                //System.out.println("---- Mouv : "+orig.getY()+" "+orig.getX()+" vers "+dest.getY()+" "+dest.getX());
 	
 		if(dest.getType() != TypeCase.POUBELLE) {
 		    /* Si il ne s'agit pas d'un mouvement d'une piece vers la poubelle, on cherche a savoir
@@ -190,6 +191,7 @@ public class Mouvement {
 
     public void appliquerMouvementInverse(Plateau p) throws HorsJeuException {
 	p.deplacerPion(dest, orig);
+        //System.out.println("---- Inverse : "+dest.getY()+" "+dest.getX()+" vers "+orig.getY()+" "+orig.getX());
 	/*p.setContenuCase(x_orig, y_orig, p.getContenuCase(x_dest, y_dest));
 	p.setContenuCase(x_dest, y_dest, Plateau.VIDE);*/
     }

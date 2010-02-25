@@ -40,17 +40,20 @@ public class DescenteNegAB implements IDescente {
 	int profondeur = 2;
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	for(int i=0; i<mouv_possibles.size(); i++){
-	    System.out.println("i : "+i);
+	    //System.out.println("i : "+i);
 	    mouvements.empiler(mouv_possibles.get(i));
 	    try {
 		ArrayList<Mouvement> mouvementsPoubelle = mouv_possibles.get(i).appliquerMouvement(p);
+                //System.out.print("Plateau après mouvement :\n"+p.toString());
 		// Si le mouvement a entrainee la prise d'autres pieces, on applique leur mouvement vers la poubelle
-		for(Mouvement m : mouvementsPoubelle)
+		for(Mouvement m : mouvementsPoubelle) {
 		    m.appliquerMouvement(p);
+                    mouvements.empiler(m);
+                }
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    int negb = -negAB(p, heuristique, getCouleurEnnemi(couleur_joueur), profondeur-1,Integer.MIN_VALUE,Integer.MAX_VALUE);
-	    System.out.println("Retour en haut. Heuristique : "+negb);
-	    System.out.println(mouvements.toString());
+	    //System.out.println("Retour en haut. Heuristique : "+negb);
+	    //System.out.println(mouvements.toString());
 	    try {
 		// Tant qu'il y a eu des suppression de pieces, on les remet sur le jeu
 		while(((Mouvement)mouvements.sommet()).getDest().getType() == Case.TypeCase.POUBELLE) {
@@ -63,8 +66,9 @@ public class DescenteNegAB implements IDescente {
 		// On effectue ensuite le mouvement inverse
 		
 		((Mouvement)mouvements.sommet()).appliquerMouvementInverse(p);
+              //  System.out.print("Plateau après depilage :\n"+p.toString());
                 lastMove = (Mouvement)(mouvements.depiler());
-                System.out.println("Mouvement associé : "+lastMove.toString());
+                //System.out.println("Mouvement associé : "+lastMove.toString());
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    if(best < negb){
 		best = negb;
@@ -118,8 +122,10 @@ public class DescenteNegAB implements IDescente {
 	    try {
 		ArrayList<Mouvement> mouvementsPoubelle = mouv_possibles.get(i).appliquerMouvement(p);
 		// Si le mouvement a entrainee la prise d'autres pieces, on applique leur mouvement vers la poubelle
-		for(Mouvement m : mouvementsPoubelle)
+		for(Mouvement m : mouvementsPoubelle) {
 		    m.appliquerMouvement(p);
+                    mouvements.empiler(m);
+                }
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
 	    int val = -negAB(p, heuristique, getCouleurEnnemi(couleur_joueur), profondeur-1,-b,-a);
 	    try {

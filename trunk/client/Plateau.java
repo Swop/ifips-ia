@@ -177,10 +177,10 @@ public class Plateau {
     }*/
 
     public void deplacerPion(Case orig, Case dest) {
-	if(orig.getContenu() != null) {
-	    dest.ajouterPion(orig.getContenu());
-	    orig.retirerPion();
-	}
+	//if(orig.getContenu() != null) {
+	    Pion p = orig.retirerPion();
+            dest.ajouterPion(p);
+	//}
     }
 
     public ArrayList<Mouvement> getMouvementsPossibles(int couleur) {
@@ -318,8 +318,8 @@ public class Plateau {
 	String ret="Plateau\n";
 	for(int i=0; i<9; i++){
 	    for(int j=0; j<9; j++){
-	    if(this.cases[i][j].getContenu()==null) ret+=".";
-	    else ret+=this.cases[i][j].getContenu().toString();
+	    if(this.cases[j][i].getContenu()==null) ret+=".";
+	    else ret+=this.cases[j][i].getContenu().toString();
 	    }
 	ret+="\n";
 	}
