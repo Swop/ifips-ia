@@ -138,9 +138,79 @@ public class HeuristiqueUltimIA implements IHeuristique {
     		eval += 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	else
     		eval -= 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
-    	eval += p.getNbMyPions(couleur);
-    	eval -= p.getNbYourPions(couleur);
-    	
+    	eval += 2*p.getNbMyPions(couleur);
+    	eval -= 2*p.getNbYourPions(couleur);
+	try{
+	    if(p.getCase(0,3).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(0,4).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(0,5).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(8,3).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(8,4).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(8,5).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	    if(p.getCase(3,0).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }if(p.getCase(4,0).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }if(p.getCase(5,0).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }if(p.getCase(3,8).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }if(p.getCase(4,8).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }if(p.getCase(4,8).getContenu() != null){
+		if(couleur == ClientJeu.BLANC)
+			eval --;
+		else
+			eval ++;
+	    }
+	}
+	catch(HorsJeuException e){}
+
     	return eval;
     }
     //return (int) (Math.random() * 100);
