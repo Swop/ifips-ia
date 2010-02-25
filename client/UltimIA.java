@@ -52,6 +52,7 @@ public class UltimIA implements IJoueur {
 	try {
 	    m.appliquerMouvement(p);
 	} catch (HorsJeuException ex) {/*Ici encore, d'apres l'arbire, il n'y a pas de soucis ... */}
+        System.out.println("Plateau après mouvement ennemi :\n"+p.toString());
     }
 
     public String quadriName() {

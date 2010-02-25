@@ -128,7 +128,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    	}
     	}
     	catch(HorsJeuException e){}
-    	if(p.getRoi().getPere().getContenu().isMort()){
+    	if(p.getRoi().isMort()){
 	    if(couleur == ClientJeu.BLANC)
 		return Integer.MIN_VALUE;
 	    else
