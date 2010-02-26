@@ -37,7 +37,7 @@ public class DescenteNegAB implements IDescente {
 	//System.out.println(mouvements);
 	int best = Integer.MIN_VALUE;
 	int idBest = -1;
-	int profondeur = 4;
+	int profondeur = 3;
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	for(int i=0; i<mouv_possibles.size(); i++){
 	    //System.out.println("i : "+i);

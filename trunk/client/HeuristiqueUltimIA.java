@@ -79,11 +79,11 @@ public class HeuristiqueUltimIA implements IHeuristique {
 		return Integer.MAX_VALUE - 1;
 	}
     	if(couleur == ClientJeu.BLANC)
-    		eval += 2*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
+    		eval += 1*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	else
-    		eval -= 2*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
-    	eval += 1*p.getNbMyPions(couleur);
-    	eval -= 1*p.getNbYourPions(couleur);
+    		eval -= 1*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
+    	eval += 5*(1/p.getNbMyPions(couleur));	//Quand le nombre de mes pions diminue, je suis plus défensif
+    	eval -= 5*p.getNbYourPions(couleur);	//Quand le nombre de ses pions diminue, je me concentre sur la victoire
 	return eval;
     }
 

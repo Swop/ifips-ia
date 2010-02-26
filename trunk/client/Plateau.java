@@ -61,6 +61,11 @@ public class Plateau {
 	poubelle = new Poubelle();
 
 	Pion p;
+	//Placement du Roi
+	p = new Roi();
+	pionsBlanc.add(p);
+	cases[4][4].ajouterPion(p);
+	roi = p;
 
 	//Placement des pions noirs
 	p = new Pion(Pion.TypePion.NOIR);
@@ -142,12 +147,6 @@ public class Plateau {
 	p = new Pion(Pion.TypePion.BLANC);
 	pionsBlanc.add(p);
 	cases[6][4].ajouterPion(p);
-
-	//Placement du Roi
-	p = new Roi();
-	pionsBlanc.add(p);
-	cases[4][4].ajouterPion(p);
-	roi = p;
     }
 
     public final synchronized static Plateau getInstance() {

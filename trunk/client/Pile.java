@@ -12,14 +12,14 @@ import java.util.*;
  */
 public class Pile implements IPile {
 
-    private Vector items;
+    private LinkedList<Object> items;
 
     public Pile() {
-	items = new Vector(10);
+	items = new LinkedList<Object>();
     }
 
     public Object empiler(Object item) {
-	items.addElement(item);
+	items.addFirst(item);
 	return item;
     }
 
@@ -29,8 +29,8 @@ public class Pile implements IPile {
 	if (len == 0) {
 	    throw new EmptyStackException();
 	}
-	item = items.elementAt(len - 1);
-	items.removeElementAt(len - 1);
+	item = items.getFirst();
+	items.removeFirst();
 	return item;
     }
 
@@ -44,7 +44,7 @@ public class Pile implements IPile {
 	if (len == 0) {
 	    throw new EmptyStackException();
 	}
-	item = items.elementAt(len - 1);
+	item = items.getFirst();
 	return item;
     }
 
@@ -56,7 +56,7 @@ public class Pile implements IPile {
 	int curseur = len-1;
 	if (len != 0) {
 	    while(curseur >= 0) {
-		item = items.elementAt(curseur);
+		item = items.get(curseur);
 		s += "\n"+item.toString();
 		curseur--;
 	    }
