@@ -112,13 +112,16 @@ public class DescenteNegAB implements IDescente {
     private int negAB(Plateau p, IHeuristique heuristique, int couleur_joueur, int profondeur, int a, int b) {
 	//System.out.println("Profondeur : "+profondeur);
 	//System.out.println(mouvements.toString());
+	int fin = heuristique.evalueFinPartie(p, couleur_joueur);
+	if(fin != 0)
+	    return fin;
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	if(mouv_possibles.size() == 0 || profondeur == 0){
 	    //lastMove = (Mouvement)mouvements.depiler();
 	    int heu = heuristique.evalue(p, couleur_joueur);
 	    //System.out.println("Heuristique "+heu+", Profondeur : "+profondeur+", Pile : ");
 	    //System.out.println(mouvements.toString());
-	    return heuristique.evalue(p, couleur_joueur);
+	    return heu;
 	}
 	for(int i=0; i<mouv_possibles.size(); i++){
 	    mouvements.empiler(mouv_possibles.get(i));
