@@ -217,8 +217,9 @@ public class Plateau {
 	while(!fin) {
 	    try {
 		case_temp = this.getCase(temp_x, temp_y);
-		if(case_temp.getType() != Case.TypeCase.MUR && case_temp.getType() != Case.TypeCase.TRONE && case_temp.getContenu() == null)
-		    list.add(new Mouvement(c, case_temp));
+		if(case_temp.getType() != Case.TypeCase.MUR && (case_temp.getType() != Case.TypeCase.TRONE || (case_temp.getContenu() == null)) && case_temp.getContenu() == null)
+		    if(case_temp.getType() != Case.TypeCase.TRONE)
+                        list.add(new Mouvement(c, case_temp));
 		else
 		    fin = true;
 		temp_y--;
@@ -232,8 +233,9 @@ public class Plateau {
 	while(!fin) {
 	    try {
 		case_temp = this.getCase(temp_x, temp_y);
-		if(case_temp.getType() != Case.TypeCase.MUR && case_temp.getType() != Case.TypeCase.TRONE && case_temp.getContenu() == null)
-		    list.add(new Mouvement(c, case_temp));
+		if(case_temp.getType() != Case.TypeCase.MUR && (case_temp.getType() != Case.TypeCase.TRONE || (case_temp.getContenu() == null)) && case_temp.getContenu() == null)
+		    if(case_temp.getType() != Case.TypeCase.TRONE)
+                        list.add(new Mouvement(c, case_temp));
 		else
 		    fin = true;
 		temp_y++;
@@ -247,8 +249,9 @@ public class Plateau {
 	while(!fin) {
 	    try {
 		case_temp = this.getCase(temp_x, temp_y);
-		if(case_temp.getType() != Case.TypeCase.MUR && case_temp.getType() != Case.TypeCase.TRONE && case_temp.getContenu() == null)
-		    list.add(new Mouvement(c, case_temp));
+		if(case_temp.getType() != Case.TypeCase.MUR && (case_temp.getType() != Case.TypeCase.TRONE || (case_temp.getContenu() == null)) && case_temp.getContenu() == null)
+		    if(case_temp.getType() != Case.TypeCase.TRONE)
+                        list.add(new Mouvement(c, case_temp));
 		else
 		    fin = true;
 		temp_x++;
@@ -262,8 +265,9 @@ public class Plateau {
 	while(!fin) {
 	    try {
 		case_temp = this.getCase(temp_x, temp_y);
-		if(case_temp.getType() != Case.TypeCase.MUR && case_temp.getType() != Case.TypeCase.TRONE && case_temp.getContenu() == null)
-		    list.add(new Mouvement(c, case_temp));
+		if(case_temp.getType() != Case.TypeCase.MUR && (case_temp.getType() != Case.TypeCase.TRONE || (case_temp.getContenu() == null)) && case_temp.getContenu() == null)
+                    if(case_temp.getType() != Case.TypeCase.TRONE)
+                        list.add(new Mouvement(c, case_temp));
 		else
 		    fin = true;
 		temp_x--;
