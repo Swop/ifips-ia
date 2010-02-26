@@ -37,7 +37,7 @@ public class DescenteNegAB implements IDescente {
 	//System.out.println(mouvements);
 	int best = Integer.MIN_VALUE;
 	int idBest = -1;
-	int profondeur = 3;
+	int profondeur = 4;
 	ArrayList<Mouvement> mouv_possibles = p.getMouvementsPossibles(couleur_joueur);
 	for(int i=0; i<mouv_possibles.size(); i++){
 	    //System.out.println("i : "+i);
@@ -57,7 +57,7 @@ public class DescenteNegAB implements IDescente {
 	    try {
 		// Tant qu'il y a eu des suppression de pieces, on les remet sur le jeu
 		while(((Mouvement)mouvements.sommet()).getDest().getType() == Case.TypeCase.POUBELLE) {
-                    System.out.println("Poubelle : "+((Mouvement)(mouvements.sommet())).toString());
+                    //System.out.println("Poubelle : "+((Mouvement)(mouvements.sommet())).toString());
                     ((Mouvement)(mouvements.depiler())).appliquerMouvementInverse(p);
                 }
                 //System.out.println("Pile après poubelle :");
@@ -77,14 +77,14 @@ public class DescenteNegAB implements IDescente {
 	}
 	if(idBest != -1) {
 	    Mouvement mouvement_choisi = mouv_possibles.get(idBest);
-            System.out.println("Meilleur H : "+best+" , Mouvement choisi : "+mouvement_choisi.toString());
+            //System.out.println("Meilleur H : "+best+" , Mouvement choisi : "+mouvement_choisi.toString());
 	    try {
 		ArrayList<Mouvement> mouvementsPoubelle = mouvement_choisi.appliquerMouvement(p);
 		for(Mouvement m : mouvementsPoubelle)
 		    m.appliquerMouvement(p);
 
 	    } catch (HorsJeuException ex) { /* Mauvais mouvement */ }
-	    System.out.print(p.toString());
+	    //System.out.print(p.toString());
 	    return mouvement_choisi.toString();
 	} else{
 	    // Normalement, ici on ne peut plus jouer. Mais on rentre jamais dans ce else vu que le serveur nous aura deja signale la fin de la partie ...
