@@ -99,8 +99,8 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	/*
 	 * On étudie le nombre de pions restant sur le plateau
 	 */
-    	eval += 5*(1/p.getNbMyPions(couleur));	//Quand le nombre de mes pions diminue, je suis plus défensif
-    	eval -= 5*p.getNbYourPions(couleur);	//Quand le nombre de ses pions diminue, je me concentre sur la victoire
+    	eval += 5*p.getNbMyPions(couleur);	//Quand le nombre de mes pions diminue, je suis plus défensif
+    	eval += 10*(16-p.getNbYourPions(couleur));	//Quand le nombre de ses pions diminue, je me concentre sur la victoire
 	return eval;
     }
 
