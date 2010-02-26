@@ -63,7 +63,7 @@ public class Mouvement {
 		if(orig.getContenu() == null) {
 		    int a = 1;
 		   System.out.println("Pas de pion han!");
-		    System.out.print(p.toString());
+		    //System.out.print(p.toString());
 		    return listeMouvementPoubelle;
 		}
 	    //System.out.println("Ca marche");

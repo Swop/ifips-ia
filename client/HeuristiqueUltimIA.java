@@ -6,7 +6,9 @@
 package client;
 
 /**
- * Notre heuristique de jeu. Principe : TODO
+ * Notre heuristique de jeu. Principe : Eviter/favoriser l'encerclement du roi
+ * donc augmenter/réduire son champ d'action. Dans un second temps, jouer la
+ * balance des pions.
  * @author swop
  */
 public class HeuristiqueUltimIA implements IHeuristique {
@@ -22,45 +24,6 @@ public class HeuristiqueUltimIA implements IHeuristique {
     public int evalue(Plateau p, int couleur) {
 	int eval = 0;
 	eval += this.evalueFinPartie(p, couleur);
-    	int nbCoupGagnant = 0;
-    	/*for(Mouvement m : p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere())){
-    		if(m.getDest().getX() == 0 && (m.getDest().getY() == 3 || m.getDest().getY() == 4 || m.getDest().getY() == 5)){
-    			nbCoupGagnant++;
-    			if(nbCoupGagnant == 2){
-    				if(couleur == ClientJeu.BLANC)
-    	    			return Integer.MAX_VALUE;
-    	    		else
-    	    			return Integer.MIN_VALUE;
-    			}
-    		}
-    		if(m.getDest().getX() == 8 && (m.getDest().getY() == 3 || m.getDest().getY() == 4 || m.getDest().getY() == 5)){
-    			nbCoupGagnant++;
-    			if(nbCoupGagnant == 2){
-    				if(couleur == ClientJeu.BLANC)
-    	    			return Integer.MAX_VALUE;
-    	    		else
-    	    			return Integer.MIN_VALUE;
-    			}
-    		}
-    		if(m.getDest().getY() == 0 && (m.getDest().getX() == 3 || m.getDest().getX() == 4 || m.getDest().getX() == 5)){
-    			nbCoupGagnant++;
-    			if(nbCoupGagnant == 2){
-    				if(couleur == ClientJeu.BLANC)
-    	    			return Integer.MAX_VALUE;
-    	    		else
-    	    			return Integer.MIN_VALUE;
-    			}
-    		}
-    		if(m.getDest().getY() == 8 && (m.getDest().getX() == 3 || m.getDest().getX() == 4 || m.getDest().getX() == 5)){
-    			nbCoupGagnant++;
-    			if(nbCoupGagnant == 2){
-    				if(couleur == ClientJeu.BLANC)
-    	    			return Integer.MAX_VALUE;
-    	    		else
-    	    			return Integer.MIN_VALUE;
-    			}
-    		}
-    	}*/
     	int encercleRoi = 0;
     	try{
 	    	if(p.getCase(p.getRoi().getPere().getX()+1, p.getRoi().getPere().getY()).getType() == Case.TypeCase.TRONE || (p.getCase(p.getRoi().getPere().getX()+1,
@@ -111,88 +74,17 @@ public class HeuristiqueUltimIA implements IHeuristique {
     	catch(HorsJeuException e){}
     	if(p.getRoi().isMort()){
 	    if(couleur == ClientJeu.BLANC)
-		return Integer.MIN_VALUE;
+		return Integer.MIN_VALUE + 1;
 	    else
-		return Integer.MAX_VALUE;
+		return Integer.MAX_VALUE - 1;
 	}
     	if(couleur == ClientJeu.BLANC)
-    		eval += 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
+    		eval += 2*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	else
-    		eval -= 3*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
-    	eval += 2*p.getNbMyPions(couleur);
-    	eval -= 2*p.getNbYourPions(couleur);
-	/*try{
-	    if(p.getCase(0,3).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(0,4).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(0,5).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(8,3).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(8,4).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(8,5).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	    if(p.getCase(3,0).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }if(p.getCase(4,0).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }if(p.getCase(5,0).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }if(p.getCase(3,8).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }if(p.getCase(4,8).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }if(p.getCase(4,8).getContenu() != null){
-		if(couleur == ClientJeu.BLANC)
-			eval --;
-		else
-			eval ++;
-	    }
-	}
-	catch(HorsJeuException e){}*/
-
-    	return eval;
+    		eval -= 2*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
+    	eval += 1*p.getNbMyPions(couleur);
+    	eval -= 1*p.getNbYourPions(couleur);
+	return eval;
     }
 
     public int evalueFinPartie(Plateau p, int couleur) {
