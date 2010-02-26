@@ -19,4 +19,5 @@ public interface IHeuristique {
      * L'entier representatif de la valeur heuristique calculee.
      */
     public int evalue(Plateau p, int couleur);
+    public int evalueFinPartie(Plateau p, int couleur);
 }

@@ -34,10 +34,18 @@ public class UltimIA implements IJoueur {
 
     public void declareLeVainqueur(int couleur) {
 	System.out.print("Le vainqueur est le joueur "+couleur+" : ");
-	if(couleur == ClientJeu.BLANC)
-	    System.out.println("Le Roy est sain et sauf ! Vive le Roy !");
-	else if(couleur == ClientJeu.NOIR)
-	    System.out.println("Le peuple a vaincu ! Le Roy à la guillotine !");
+	if(couleur == ClientJeu.BLANC){
+	    if(couleur == color)
+		System.out.println("Le Roy est sain et sauf ! Vive le Roy !");
+	    else
+		System.out.println("Je demande une vérification de l'arbitre !");
+	}
+	else if(couleur == ClientJeu.NOIR){
+	    if(couleur == color)
+		System.out.println("Le peuple a vaincu ! Le Roy à la guillotine !");
+	    else
+		System.out.println("Je demande une vérification de l'arbitre !");
+	}
 	else
 	    System.out.println("Il n'y a pas de vainqueur ... Match nul !!");
     }
