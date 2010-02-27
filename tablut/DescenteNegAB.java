@@ -166,9 +166,9 @@ public class DescenteNegAB implements IDescente {
      * @return La couleur de l'ennemi
      */
     private int getCouleurEnnemi(int couleur) {
-	if(couleur == ClientJeu.BLANC)
-	    return ClientJeu.NOIR;
+	if(couleur == ClientUltimIA.BLANC)
+	    return ClientUltimIA.NOIR;
 	else
-	    return ClientJeu.BLANC;
+	    return ClientUltimIA.BLANC;
     }
 }

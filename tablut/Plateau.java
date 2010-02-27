@@ -206,7 +206,7 @@ public class Plateau {
 	ArrayList<Mouvement> list = new ArrayList<Mouvement>();
 
 	ArrayList<Pion> listePions;
-	if(couleur == ClientJeu.BLANC)
+	if(couleur == ClientUltimIA.BLANC)
 	    listePions = pionsBlanc;
 	else
 	    listePions = pionsNoir;
@@ -313,7 +313,7 @@ public class Plateau {
      */
     public int getNbMyPions(int couleur){
     	int pionsVivant = 0;
-	if(couleur == ClientJeu.BLANC){
+	if(couleur == ClientUltimIA.BLANC){
 	    for(Pion p : pionsBlanc){
 		if(!p.isMort())
 		    pionsVivant++;
@@ -335,7 +335,7 @@ public class Plateau {
      */
     public int getNbYourPions(int couleur){
     	int pionsVivant = 0;
-	if(couleur == ClientJeu.BLANC){
+	if(couleur == ClientUltimIA.BLANC){
 	    for(Pion p : pionsNoir){
 		if(!p.isMort())
 		    pionsVivant++;

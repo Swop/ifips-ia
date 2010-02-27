@@ -77,9 +77,9 @@ public class Pion {
      */
     public static int getCouleurPion(TypePion type) {
 	if(type == TypePion.BLANC || type == TypePion.ROI)
-	    return ClientJeu.BLANC;
+	    return ClientUltimIA.BLANC;
 	else
-	    return ClientJeu.NOIR;
+	    return ClientUltimIA.NOIR;
     }
     /**
      * Retourne l'entier representatif de la couleur ennemie de la couleur du pion d'apres son type
@@ -88,10 +88,10 @@ public class Pion {
      */
      public static int getCouleurPionAdverse(TypePion type) {
 	 int couleur = getCouleurPion(type);
-	 if(couleur == ClientJeu.BLANC)
-	     return ClientJeu.NOIR;
+	 if(couleur == ClientUltimIA.BLANC)
+	     return ClientUltimIA.NOIR;
 	 else
-	     return ClientJeu.BLANC;
+	     return ClientUltimIA.BLANC;
     }
     @Override
     public String toString() {

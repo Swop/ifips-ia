@@ -31,7 +31,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    					p.getRoi().getPere().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 			if(encercleRoi > 1){
-			    if(couleur == ClientJeu.BLANC)
+			    if(couleur == ClientUltimIA.BLANC)
 				    eval -= 3*(encercleRoi-1);
 			    else
 				    eval += 3*(encercleRoi-1);
@@ -43,7 +43,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    			p.getRoi().getPere().getY()).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(encercleRoi > 1){
-			    if(couleur == ClientJeu.BLANC)
+			    if(couleur == ClientUltimIA.BLANC)
 				    eval -= 3*(encercleRoi-1);
 			    else
 				    eval += 3*(encercleRoi-1);
@@ -55,7 +55,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    			p.getRoi().getPere().getY()+1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(encercleRoi > 1){
-			    if(couleur == ClientJeu.BLANC)
+			    if(couleur == ClientUltimIA.BLANC)
 				    eval -= 3*(encercleRoi-1);
 			    else
 				    eval += 3*(encercleRoi-1);
@@ -67,7 +67,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	    			p.getRoi().getPere().getY()-1).getContenu().getType() == Pion.TypePion.NOIR)){
 	    		encercleRoi++;
 	    		if(encercleRoi > 1){
-			    if(couleur == ClientJeu.BLANC)
+			    if(couleur == ClientUltimIA.BLANC)
 				    eval -= 3*(encercleRoi-1);
 			    else
 				    eval += 3*(encercleRoi-1);
@@ -77,7 +77,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
     	catch(HorsJeuException e){/*Si le roi est contre un bord, il est imprenable*/}
     	//Si le roi est pris, heuristique maximale/minimale
 	if(p.getRoi().isMort()){
-	    if(couleur == ClientJeu.BLANC)
+	    if(couleur == ClientUltimIA.BLANC)
 		return Integer.MIN_VALUE + 1;
 	    else
 		return Integer.MAX_VALUE - 1;
@@ -87,7 +87,7 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	 * Chaque mouvement possible augement l'heuristique blanche, réciproquement
 	 * pour celle des noirs.
 	 */
-    	if(couleur == ClientJeu.BLANC)
+    	if(couleur == ClientUltimIA.BLANC)
     		eval += 1*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
     	else
     		eval -= 1*(p.getMouvementsPossiblesPourUnPoint(p.getRoi().getPere()).size());
@@ -112,28 +112,28 @@ public class HeuristiqueUltimIA implements IHeuristique {
 	int eval = 0;
     	if(p.getRoi().getPere().getX() == 0 && (p.getRoi().getPere().getY() == 3 || p.getRoi().getPere().getY() == 4 ||
     			p.getRoi().getPere().getY() == 5)){
-    		if(couleur == ClientJeu.BLANC)
+    		if(couleur == ClientUltimIA.BLANC)
     			return Integer.MAX_VALUE - 1;
     		else
     			return Integer.MIN_VALUE + 1;
     	}
     	if(p.getRoi().getPere().getX() == 8 && (p.getRoi().getPere().getY() == 3 || p.getRoi().getPere().getY() == 4 ||
     			p.getRoi().getPere().getY() == 5)){
-    		if(couleur == ClientJeu.BLANC)
+    		if(couleur == ClientUltimIA.BLANC)
     			return Integer.MAX_VALUE - 1;
     		else
     			return Integer.MIN_VALUE + 1;
     	}
     	if(p.getRoi().getPere().getY() == 0 && (p.getRoi().getPere().getX() == 3 || p.getRoi().getPere().getX() == 4 ||
     			p.getRoi().getPere().getX() == 5)){
-    		if(couleur == ClientJeu.BLANC)
+    		if(couleur == ClientUltimIA.BLANC)
     			return Integer.MAX_VALUE - 1;
     		else
     			return Integer.MIN_VALUE + 1;
     	}
     	if(p.getRoi().getPere().getY() == 8 && (p.getRoi().getPere().getX() == 3 || p.getRoi().getPere().getX() == 4 ||
     			p.getRoi().getPere().getX() == 5)){
-    		if(couleur == ClientJeu.BLANC)
+    		if(couleur == ClientUltimIA.BLANC)
     			return Integer.MAX_VALUE - 1;
     		else
     			return Integer.MIN_VALUE + 1;
