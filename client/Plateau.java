@@ -1,33 +1,42 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 import java.util.ArrayList;
 /**
- *
+ * Gestion du plateau (singleton)
  * @author swop
  */
 public class Plateau {
-
+    /**
+     * Instance du singleton
+     */
     private static Plateau instance = null;
-
-    /*public static int VIDE = 0;
-    public static int BLANC = 1;
-    public static int NOIR = 2;
-    public static int ROI = 3;
-    public static int MUR = 4;*/
-
+    /**
+     * Nombre de cases du plateau
+     */
     public static int NB_CASES = 9;
-
+    /**
+     * Cases du plateau
+     */
     private Case[][] cases;
+    /**
+     * Case "poubelle" (stocke l'ensemble des pions manges)
+     */
     private Poubelle poubelle;
+    /**
+     * Liste des pieces blanches
+     */
     private ArrayList<Pion> pionsBlanc;
+    /**
+     * Liste des pieces noires
+     */
     private ArrayList<Pion> pionsNoir;
+    /**
+     * Reference vers le roi
+     */
     private Pion roi;
-
+    /**
+     * Creation du plateau
+     */
     private Plateau() {
 	pionsBlanc = new ArrayList<Pion>();
 	pionsNoir = new ArrayList<Pion>();
@@ -148,13 +157,23 @@ public class Plateau {
 	pionsBlanc.add(p);
 	cases[6][4].ajouterPion(p);
     }
-
+    /**
+     * Retourne l'instance du singleton Plateau
+     * @return L'instance du sigleton Plateau
+     */
     public final synchronized static Plateau getInstance() {
          if (instance == null)
              instance = new Plateau();
          return instance;
      }
 
+    /**
+     * Recupere une case du plateau a partir de ses coordonnees
+     * @param x La coordonee x de la case
+     * @param y La coordonee y de la case
+     * @return La case correspondante
+     * @throws HorsJeuException
+     */
     public Case getCase(int x, int y) throws HorsJeuException {
 	if(x >= 0 && x < NB_CASES &&  y >= 0 && y < NB_CASES) {
 	    return cases[x][y];
@@ -162,26 +181,27 @@ public class Plateau {
 	    throw new HorsJeuException();
 	}
     }
-
+    /**
+     * Retourne la poubelle
+     * @return La poubelle
+     */
     public Case getPoubelle() {
 	return poubelle;
     }
-
-    /*public void setContenuCase(int x, int y, int valeur) throws HorsJeuException {
-	if(x >= 0 && x < NB_CASES &&  y >= 0 && y < NB_CASES) {
-	    cases[x][y] = valeur;
-	} else {
-	    throw new HorsJeuException();
-	}
-    }*/
-
+    /**
+     * Deplace le pion d'un endoit du plateau a un autre
+     * @param orig Case d'origine
+     * @param dest Case de destination
+     */
     public void deplacerPion(Case orig, Case dest) {
-	//if(orig.getContenu() != null) {
-	    Pion p = orig.retirerPion();
-            dest.ajouterPion(p);
-	//}
+	Pion p = orig.retirerPion();
+	dest.ajouterPion(p);
     }
-
+    /**
+     * Retourne les mouvements possibles pour un joueur donne
+     * @param couleur Couleur du joueur
+     * @return La liste des mouvements possibles pour tous ces pions
+     */
     public ArrayList<Mouvement> getMouvementsPossibles(int couleur) {
 	ArrayList<Mouvement> list = new ArrayList<Mouvement>();
 
@@ -198,7 +218,11 @@ public class Plateau {
 	}
 	return list;
     }
-
+    /**
+     * Recuperer tous les mouvements possibles pour un pion en particulier
+     * @param c La case du pion
+     * @return La liste des mouvements du pion
+     */
     public ArrayList<Mouvement> getMouvementsPossiblesPourUnPoint(Case c) {
 	ArrayList<Mouvement> list = new ArrayList<Mouvement>();
 	int x = c.getX();
@@ -275,11 +299,18 @@ public class Plateau {
 
 	return list;
     }
-
+    /**
+     * Retourne une réference vers le roi
+     * @return Le roi
+     */
     public Pion getRoi(){
 	return roi;
     }
-
+    /**
+     * Renseigne sur le nombre de pions encore sur le plateau pour un joueur
+     * @param couleur La couleur du joueur
+     * @return Le nombre de pions restants du joueur
+     */
     public int getNbMyPions(int couleur){
     	int pionsVivant = 0;
 	if(couleur == ClientJeu.BLANC){
@@ -297,7 +328,11 @@ public class Plateau {
 	    return pionsVivant;
 	}
     }
-    
+    /**
+     * Renseigne sur le nombre de pions encore sur le plateau pour l'adevrsaire d'un joueur
+     * @param couleur La couleur du joueur
+     * @return Le nombre de pions restants de l'aversaire du joueur sont la couleur est fournie en paramètre
+     */
     public int getNbYourPions(int couleur){
     	int pionsVivant = 0;
 	if(couleur == ClientJeu.BLANC){

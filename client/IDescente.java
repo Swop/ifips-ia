@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 /**
@@ -16,6 +11,8 @@ public interface IDescente {
      * L'heuristique a utiliser pour evaluer les feuilles de l'horizon.
      * @param plateau
      * Le plateau actuel.
+     * @param couleurJoueur
+     * La couleur du joueur
      * @return
      * La chaine de caractere decrivant le meilleur coup a jouer.
      */
