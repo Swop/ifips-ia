@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Interface generalisant le concept de la fonction heuristique.

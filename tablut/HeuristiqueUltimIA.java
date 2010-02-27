@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Notre heuristique de jeu. Principe : Eviter/favoriser l'encerclement du roi

@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Le roi

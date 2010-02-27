@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Poubelle du plateau. Les pions pris vont dans la poubelle

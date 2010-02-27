@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Un pion sur le plateau
