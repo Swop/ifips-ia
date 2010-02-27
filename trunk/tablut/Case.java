@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Une case sur le plateau

@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Voici l'interface abstraite qu'il suffit d'implanter pour jouer.

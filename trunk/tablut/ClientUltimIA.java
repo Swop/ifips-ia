@@ -1,4 +1,4 @@
-package client;
+package tablut;
 import java.net.*;
 import java.io.*;
 import java.util.*;

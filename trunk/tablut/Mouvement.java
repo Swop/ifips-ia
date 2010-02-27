@@ -1,7 +1,7 @@
-package client;
+package tablut;
 
-import client.Case.TypeCase;
-import client.Pion.TypePion;
+import tablut.Case.TypeCase;
+import tablut.Pion.TypePion;
 import java.util.ArrayList;
 
 /**

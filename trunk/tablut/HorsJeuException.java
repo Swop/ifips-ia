@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Exception levee lorsque l'on essaye d'acceder a un emplacement en dehors du plateau de jeu

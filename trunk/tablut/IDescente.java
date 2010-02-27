@@ -1,4 +1,4 @@
-package client;
+package tablut;
 
 /**
  * Interface generalisant le principe de descente. Les algorithme de descente (Alpha-Beta, Minimax, Interative Deep. etc ...) doivent implementer cette interface.
