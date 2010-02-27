@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 /**
@@ -145,5 +140,4 @@ public class HeuristiqueUltimIA implements IHeuristique {
     	}
 	return eval;
     }
-    //return (int) (Math.random() * 100);
 }

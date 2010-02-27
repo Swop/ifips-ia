@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 /**
@@ -19,5 +14,14 @@ public interface IHeuristique {
      * L'entier representatif de la valeur heuristique calculee.
      */
     public int evalue(Plateau p, int couleur);
+    /**
+     * Meta-heuristique rapide qui stop le parcours si le roi arrive sur une case gagnante.
+     * @param p
+     * Plateau étudié
+     * @param couleur
+     * Couleur du joueur
+     * @return
+     * Une valeur max/min si la partie est finie, 0 sinon
+     */
     public int evalueFinPartie(Plateau p, int couleur);
 }

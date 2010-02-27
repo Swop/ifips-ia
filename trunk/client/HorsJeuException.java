@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 /**
- *
+ * Exception levee lorsque l'on essaye d'acceder a un emplacement en dehors du plateau de jeu
  * @author swop
  */
 public class HorsJeuException extends Exception {

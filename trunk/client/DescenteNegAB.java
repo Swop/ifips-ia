@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 import java.util.ArrayList;
@@ -12,9 +7,18 @@ import java.util.ArrayList;
  * @author swop
  */
 public class DescenteNegAB implements IDescente {
+    /**
+     * Pile de mouvement gardant trace de l'historique des mouvements appliques aux pieces du plateau
+     */
     private Pile mouvements;
+    /**
+     * Dernier mouvement applique
+     */
     private Mouvement lastMove;
 
+    /**
+     * Constructeur de l'algorithme de descente
+     */
     public DescenteNegAB() {
 	mouvements = new Pile();
 	lastMove = null;
@@ -156,7 +160,11 @@ public class DescenteNegAB implements IDescente {
 	//lastMove = (Mouvement)mouvements.depiler();
 	return a;
     }
-
+    /**
+     * Retourne la couleur opposee a la couleur donnee en paramettre
+     * @param couleur Une couleur
+     * @return La couleur de l'ennemi
+     */
     private int getCouleurEnnemi(int couleur) {
 	if(couleur == ClientJeu.BLANC)
 	    return ClientJeu.NOIR;

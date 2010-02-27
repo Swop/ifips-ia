@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 import client.Case.TypeCase;
@@ -10,66 +5,55 @@ import client.Pion.TypePion;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe representant un mouvement a effectuer sur le plateau
  * @author swop
  */
 public class Mouvement {
-    /*private int x_orig;
-    private int y_orig;
-    private int x_dest;
-    private int y_dest;*/
+    /**
+     * La case d'origine
+     */
     private Case orig;
+    /**
+     * La case de destination
+     */
     private Case dest;
-
-    /*public Mouvement(int x_orig, int y_orig, int x_dest, int y_dest) {
-	this.x_orig = x_orig;
-	this.y_orig = y_orig;
-	this.x_dest = x_dest;
-	this.y_dest = y_dest;
-    }*/
-
+    /**
+     * Constructeur du mouvement
+     * @param n_orig Case d'origine
+     * @param n_dest Case de destination
+     */
     public Mouvement(Case n_orig, Case n_dest) {
 	orig = n_orig;
 	dest = n_dest;
     }
-
-    /*public int getXOrig() {
-	return this.x_orig;
-    }
-
-    public int getYOrig() {
-	return this.y_orig;
-    }
-
-    public int getXDest() {
-	return this.x_dest;
-    }
-
-    public int getYDest() {
-	return this.y_dest;
-    }*/
-
+    /**
+     * Retourne la case d'origine du mouvement
+     * @return la case d'orgigine du mouvement
+     */
     public Case getOrig() {
 	return orig;
     }
-
+    /**
+     * Retourne la case de destination du mouvement
+     * @return la case de destination du mouvement
+     */
     public Case getDest() {
 	return dest;
     }
-
+    /**
+     * Applique le mouvement sur un certain plateau
+     * @param p Le plateau sur lequel appliquer le mouvement
+     * @return Liste des mouvements des pions manges vers la poubelle, resultant du mouvement du pion
+     * @throws HorsJeuException
+     */
     public ArrayList<Mouvement> appliquerMouvement(Plateau p) throws HorsJeuException {
 		ArrayList<Mouvement> listeMouvementPoubelle = new ArrayList<Mouvement>();
 	
 		if(orig.getContenu() == null) {
-		    int a = 1;
-		   System.out.println("Pas de pion han!");
-		    //System.out.print(p.toString());
 		    return listeMouvementPoubelle;
 		}
-	    //System.out.println("Ca marche");
 		TypePion type = orig.getContenu().getType();
 		p.deplacerPion(orig, dest);
-                //System.out.println("---- Mouv : "+orig.getY()+" "+orig.getX()+" vers "+dest.getY()+" "+dest.getX());
 	
 		if(dest.getType() != TypeCase.POUBELLE) {
 		    /* Si il ne s'agit pas d'un mouvement d'une piece vers la poubelle, on cherche a savoir
@@ -96,7 +80,14 @@ public class Mouvement {
 		}
 		return listeMouvementPoubelle;
     }
-
+    /**
+     * Cherche s'il est possible de manger une piece sur un cote
+     * @param type Type du pion "mangeur"
+     * @param dest Case du pion mangeur
+     * @param diff_x (+/-)1 si on regarde sur la droite/gauche. 0 sinon
+     * @param diff_y (+/-)1 si on regarde vers le bas/le haut. 0 sinon
+     * @return Le mouvement de la piece mangee vers la poubelle ou null si aucune piece n'est mangee
+     */
     private Mouvement mangerPieceEventuelleSurUnCote(TypePion type, Case dest, int diff_x, int diff_y) {
 	Case a_cote;
 	Case deux_cases_plus_loin;
@@ -187,7 +178,11 @@ public class Mouvement {
 
 	return pieceMangee;
     }
-
+    /**
+     * Applique le mouvement de façon inverse
+     * @param p Le plateau sur lequel appliquer le mouvement inverse
+     * @throws HorsJeuException
+     */
     public void appliquerMouvementInverse(Plateau p) throws HorsJeuException {
 	p.deplacerPion(dest, orig);
         //System.out.println("---- Inverse : "+dest.getY()+" "+dest.getX()+" vers "+orig.getY()+" "+orig.getX());

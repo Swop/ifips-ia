@@ -1,15 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package client;
 
 /**
- *
+ * Le roi
  * @author swop
  */
 public class Roi extends Pion {
+    /**
+     * Constructeur
+     */
     public Roi() {
 	super(Pion.TypePion.ROI);
     }
