@@ -42,7 +42,10 @@ public class UltimIA implements IJoueur {
      * @return Le coup choisi
      */
     public String choixMouvement() {
-	return methode_descente.trouveMeilleurCoup(heuristique, p, color);
+	String mouv =  methode_descente.trouveMeilleurCoup(heuristique, p, color);
+	System.out.println("J'ai choisi le mouvement : "+mouv.toString());
+	System.out.println("Plateau après mon mouvement :\n"+p.toString());
+	return mouv;
     }
     /**
      * Declare le vainqueur de la partie en console
