@@ -18,7 +18,7 @@ import java.util.*;
  * @author L. Simon (Univ. Paris-Sud)- 2006
  * @see IJoueur
  */
-public class ClientJeu {
+public class ClientUltimIA {
 	
 	static final int NOIR = 2; // Vous pouvez changer cela en interne si vous le souhaitez
 	static final int BLANC = 1; // Mais pas lors de la conversation avec l'arbitre

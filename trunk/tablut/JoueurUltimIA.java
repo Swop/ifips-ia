@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Notre joueur virtuel (équipe "UltimIA"). Se charge de lancer l'algorithme et de faire evouluer le plateau après un mouvement de l'ennemi
  * @author NorTicUs
  */
-public class UltimIA implements IJoueur {
+public class JoueurUltimIA implements IJoueur {
     /**
      * Couleur du joueur
      */
@@ -53,13 +53,13 @@ public class UltimIA implements IJoueur {
      */
     public void declareLeVainqueur(int couleur) {
 	System.out.print("Le vainqueur est le joueur "+couleur+" : ");
-	if(couleur == ClientJeu.BLANC){
+	if(couleur == ClientUltimIA.BLANC){
 	    if(couleur == color)
 		System.out.println("Le Roy est sain et sauf ! Vive le Roy !");
 	    else
 		System.out.println("Je demande une vérification de l'arbitre !");
 	}
-	else if(couleur == ClientJeu.NOIR){
+	else if(couleur == ClientUltimIA.NOIR){
 	    if(couleur == color)
 		System.out.println("Le peuple a vaincu ! Le Roy à la guillotine !");
 	    else
